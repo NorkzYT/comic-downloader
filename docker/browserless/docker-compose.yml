@@ -1,0 +1,35 @@
+# Installation: https://www.browserless.io/docs/docker-quickstart
+
+services:
+  comic-downloader-browserless:
+    image: ghcr.io/browserless/chromium
+    container_name: comic-downloader-browserless
+    restart: unless-stopped
+    environment:
+      - TOKEN=${TOKEN}
+      - CONCURRENT=10
+      - TIMEOUT=300000
+      - QUEUED=10
+      - HEALTH=true
+      - MAX_MEMORY_PERCENT=80
+      - MAX_CPU_PERCENT=80
+      - ALLOW_GET=true
+      - ALLOW_FILE_PROTOCOL=true
+      - METRICS_JSON_PATH=/root/metrics.json
+      - DATA_DIR=/tmp/my-profile
+      - DOWNLOAD_DIR=/downloads
+      # Proxy:
+      # - EXTERNAL=${protocol}://${username}:${password}@${host}:${port} 
+    ports:
+      - 8454:3000
+    volumes:
+      - /opt/appdata/comic-downloader-browserless/volume/root:/root
+      - /opt/appdata/comic-downloader-browserless/volume/tmp/my-profile:/tmp/my-profile
+      - /opt/appdata/comic-downloader-browserless/volume/downloads:/downloads
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    driver: bridge
+    external: true
