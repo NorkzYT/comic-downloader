@@ -39,7 +39,7 @@
 - [Supported Websites](#-supported-websites)
 - [Installation](#-installation)
   - [Linux & macOS](#linux--macos)
-  - [Windows](#-windows)
+  - [Windows](#%EF%B8%8F-windows)
   - [Docker](#-docker)
 - [Usage](#-usage)
   - [Basic Usage](#basic-usage)
@@ -47,7 +47,7 @@
   - [Language Selection](#language-selection)
   - [Bundling Chapters](#bundling-chapters)
   - [Help](#help)
-- [Troubleshooting](#-troubleshooting)
+- [Troubleshooting](#%EF%B8%8F-troubleshooting)
 - [Contribution](#-contribution)
 - [Star History](#-star-history)
 
