@@ -36,21 +36,20 @@
 <details>
 <summary><strong>Expand Table of Contents</strong></summary>
 
-- [Supported Websites](#supported-websites)
-- [Installation](#installation)
+- [Supported Websites](#-supported-websites)
+- [Installation](#-installation)
   - [Linux & macOS](#linux--macos)
-  - [Windows](#windows)
-  - [Docker](#docker)
-- [Usage](#usage)
+  - [Windows](#-windows)
+  - [Docker](#-docker)
+- [Usage](#-usage)
   - [Basic Usage](#basic-usage)
   - [Chapter Range](#chapter-range)
   - [Language Selection](#language-selection)
   - [Bundling Chapters](#bundling-chapters)
   - [Help](#help)
-- [Troubleshooting](#troubleshooting)
-- [Contribution](#contribution)
-- [License](#license)
-- [Star History](#star-history)
+- [Troubleshooting](#-troubleshooting)
+- [Contribution](#-contribution)
+- [Star History](#-star-history)
 
 </details>
 
@@ -104,7 +103,7 @@ To bypass the Gatekeeper security prompt, run:
 sudo spctl --master-disable
 ```
 
-### Windows
+### 🖥️ Windows
 
 1. Download the latest `.exe` from [Releases](https://github.com/NorkzYT/comic-downloader/releases).
 2. Place the `.exe` in a directory in your system's `PATH` (e.g., `C:\Windows\System32`).
