@@ -1,0 +1,32 @@
+{
+	"name": "comic-downloader",
+	"description": "Fast, reliable, and easy-to-use CLI tool for downloading comics (manga, manhwa, and more) from popular websites.",
+	"version": "1.0.0",
+	"author": "NorkzYT",
+	"private": false,
+	"scripts": {
+		"clean:install": "rm -rf node_modules/ && rm -rf package-lock.json && npm i",
+		"prettier:check": "prettier --check .",
+		"prettier:format": "prettier --write ."
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "echo \"[Husky] pre-commit\"",
+			"commit-msg": "echo \"[Husky] commit-msg\""
+		}
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^19.8.0",
+		"@commitlint/config-conventional": "^19.8.0",
+		"@types/node": "^22.13.14",
+		"husky": "^9.1.7",
+		"opencommit": "^3.2.7"
+	},
+	"engines": {
+		"npm": ">=7.10.0",
+		"node": ">=16.0.0"
+	},
+	"dependencies": {
+		"ts-node": "^10.9.2"
+	}
+}

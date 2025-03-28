@@ -2,4 +2,5 @@ comic-downloader
 *.cbz
 demos/*.yml
 
+node_modules
 .env
