@@ -6,8 +6,8 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/NorkzYT/comic-downloader/grabber"
-	"github.com/NorkzYT/comic-downloader/http"
+	"github.com/NorkzYT/comic-downloader/src/grabber"
+	"github.com/NorkzYT/comic-downloader/src/http"
 )
 
 // File represents a downloaded file

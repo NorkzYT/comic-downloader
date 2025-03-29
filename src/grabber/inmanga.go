@@ -6,8 +6,8 @@ import (
 	"regexp"
 	"strconv"
 
+	"github.com/NorkzYT/comic-downloader/src/http"
 	"github.com/PuerkitoBio/goquery"
-	"github.com/NorkzYT/comic-downloader/http"
 )
 
 // Inmanga is a grabber for inmanga.com

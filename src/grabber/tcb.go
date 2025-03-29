@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/NorkzYT/comic-downloader/http"
+	"github.com/NorkzYT/comic-downloader/src/http"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/fatih/color"
 )

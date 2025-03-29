@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/NorkzYT/comic-downloader/browserless"
+	"github.com/NorkzYT/comic-downloader/src/browserless"
 )
 
 // AsuraChromedp implements the Site interface for asuracomic.net using chromedp.

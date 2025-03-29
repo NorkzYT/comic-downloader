@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/NorkzYT/comic-downloader/http"
+	"github.com/NorkzYT/comic-downloader/src/http"
 )
 
 // Mangadex is a grabber for mangadex.org

@@ -5,8 +5,8 @@ BRANCH_OR_TAG := develop
 endif
 
 VERSION := $(shell git rev-parse --short HEAD)
-GOLDFLAGS += -X 'github.com/NorkzYT/comic-downloader/cmd.Version=$(VERSION)'
-GOLDFLAGS += -X 'github.com/NorkzYT/comic-downloader/cmd.Tag=$(BRANCH_OR_TAG)'
+GOLDFLAGS += -X 'github.com/NorkzYT/comic-downloader/src/cmd.Version=$(VERSION)'
+GOLDFLAGS += -X 'github.com/NorkzYT/comic-downloader/src/cmd.Tag=$(BRANCH_OR_TAG)'
 GOFLAGS = -ldflags="$(GOLDFLAGS)"
 RICHGO := $(shell command -v richgo 2> /dev/null)
 

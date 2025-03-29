@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/NorkzYT/comic-downloader/downloader"
+	"github.com/NorkzYT/comic-downloader/src/downloader"
 )
 
 // ArchiveCBZ archives the given files into a CBZ file

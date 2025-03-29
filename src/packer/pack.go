@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/NorkzYT/comic-downloader/downloader"
-	"github.com/NorkzYT/comic-downloader/grabber"
+	"github.com/NorkzYT/comic-downloader/src/downloader"
+	"github.com/NorkzYT/comic-downloader/src/grabber"
 )
 
 // DownloadedChapter represents a downloaded chapter (a Chapter + Files)
