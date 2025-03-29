@@ -119,7 +119,7 @@ comic-downloader [URL] [range]
 Run using Docker:
 
 ```bash
-docker run --rm -it -v "$PWD:/downloads" NorkzYT/comic-downloader --help
+docker run --rm -it -v "/opt/comic-downloader:/downloads" NorkzYT/comic-downloader --help
 ```
 
 > **Note:** Downloads will be saved in your current working directory.

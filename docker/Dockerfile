@@ -3,9 +3,6 @@ FROM golang:latest as builder
 
 LABEL maintainer="Richard Lora <richard@pcscorp.dev>"
 
-ARG CI_COMMIT_REF_NAME
-ENV CI_COMMIT_REF_NAME ${CI_COMMIT_REF_NAME:-latest}
-
 WORKDIR /app
 
 COPY go.mod go.sum ./
