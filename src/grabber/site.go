@@ -33,6 +33,8 @@ type Settings struct {
 	Range string
 	// OutputDir is the output directory for the downloaded files
 	OutputDir string
+	// New field: archive format ("cbz", "zip", "raw", "epub", "cbr")
+	Format string
 }
 
 // MaxConcurrency is the max concurrency for a site
@@ -88,6 +90,10 @@ func (g *Grabber) IdentifySite() (Site, []error) {
 	}
 
 	return nil, errs
+}
+
+func (g *Grabber) GetFormat() string {
+	return g.Settings.Format
 }
 
 // BaseUrl returns the base url of the site

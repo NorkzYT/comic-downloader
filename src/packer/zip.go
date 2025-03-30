@@ -9,16 +9,15 @@ import (
 	"github.com/NorkzYT/comic-downloader/src/downloader"
 )
 
-// CBZArchiver creates a CBZ archive (.cbz file) from a set of images.
-type CBZArchiver struct{}
+// ZIPArchiver is functionally similar to CBZArchiver but uses a .zip extension.
+type ZIPArchiver struct{}
 
-// Archive creates a CBZ file by zipping all provided image files.
-// Each file is named with a three-digit counter (e.g. "001.jpg").
-func (a *CBZArchiver) Archive(outputDir, filename string, files []*downloader.File, progress func(page, progress int)) (string, error) {
+// Archive creates a ZIP archive (.zip file) with the provided images.
+func (a *ZIPArchiver) Archive(outputDir, filename string, files []*downloader.File, progress func(page, progress int)) (string, error) {
 	if len(files) == 0 {
 		return "", fmt.Errorf("no files to pack")
 	}
-	fullPath := filepath.Join(outputDir, filename+".cbz")
+	fullPath := filepath.Join(outputDir, filename+".zip")
 	outFile, err := os.Create(fullPath)
 	if err != nil {
 		return "", err
@@ -35,7 +34,6 @@ func (a *CBZArchiver) Archive(outputDir, filename string, files []*downloader.Fi
 		if _, err = writer.Write(file.Data); err != nil {
 			return "", err
 		}
-		// Report progress: increment one page at a time.
 		progress(1, 0)
 	}
 	if err = zipWriter.Close(); err != nil {
@@ -44,7 +42,7 @@ func (a *CBZArchiver) Archive(outputDir, filename string, files []*downloader.Fi
 	return fullPath, nil
 }
 
-// Extension returns the CBZ file extension.
-func (a *CBZArchiver) Extension() string {
-	return "cbz"
+// Extension returns the ZIP file extension.
+func (a *ZIPArchiver) Extension() string {
+	return "zip"
 }

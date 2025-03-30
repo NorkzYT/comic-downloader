@@ -122,6 +122,12 @@ func Run(cmd *cobra.Command, args []string) {
 	// sort and filter specified ranges
 	chapters = chapters.FilterRanges(rngs)
 
+	// Ensure the output directory exists; if it does not, create it.
+	if err := os.MkdirAll(settings.OutputDir, 0755); err != nil {
+		color.Red("Error creating output directory: " + err.Error())
+		os.Exit(1)
+	}
+
 	if len(chapters) == 0 {
 		color.Yellow("No chapters found for the specified ranges")
 		os.Exit(1)
@@ -327,6 +333,7 @@ func init() {
 	rootCmd.Flags().StringVarP(&settings.FilenameTemplate, "filename-template", "t", packer.FilenameTemplateDefault, "template for the resulting filename")
 	// set as persistent, so version command does not complain about the -o flag set via docker
 	rootCmd.PersistentFlags().StringVarP(&settings.OutputDir, "output-dir", "o", "./", "output directory for the downloaded files")
+	rootCmd.Flags().StringVarP(&settings.Format, "format", "f", "cbz", "archive format: cbz, zip, raw, cbr") // epub
 }
 
 func cerr(err error, prefix string) {
