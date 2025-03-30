@@ -51,7 +51,7 @@ Would download chapters 10 to 20 of Black Clover from mangadex.org in Spanish.
 
   comic-downloader --language es --bundle https://mangadex.org/title/e7eabe96-aa17-476f-b431-2497d5e9d060/black-clover 10-20
 
-It would also download chapters 10 to 20 of Black Clover from mangadex.org in Spanish, but in this case would bundle them into a single file.
+It would also download chapters 10 to 20 of Black Clover from mangadex.org in Spanish, although in this case would bundle them into a single file.
 
 Note arguments aren't really positional, you can specify them in any order:
 
@@ -119,8 +119,9 @@ func Run(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
+	// Initialize the progress writer with AutoStop disabled
 	pw := progress.NewWriter()
-	pw.SetAutoStop(true)
+	pw.SetAutoStop(false) // Disable auto-stop so completed trackers are not cleared
 	pw.SetUpdateFrequency(100 * time.Millisecond)
 	pw.SetStyle(progress.StyleBlocks)
 	pw.Style().Colors = progress.StyleColorsExample
@@ -133,6 +134,11 @@ func Run(cmd *cobra.Command, args []string) {
 	pw.Style().Visibility.Tracker = true
 	pw.Style().Visibility.TrackerOverall = true
 	pw.Style().Visibility.Value = true
+
+	// Sorts by the Message alphabetically in ascending order.
+	// https://github.com/jedib0t/go-pretty/blob/18e8a019b34e7e802e7f0c2cd78d2f63f7840689/progress/tracker_sort.go#L13
+	pw.SetSortBy(progress.SortByMessage)
+
 	go pw.Render()
 
 	wg := sync.WaitGroup{}
@@ -142,27 +148,35 @@ func Run(cmd *cobra.Command, args []string) {
 	termWidth := getTerminalWidth()
 	mangaLen, chapterLen := calculateTitleLengths(termWidth)
 
-	for _, chap := range chapters {
+	// Pre-create trackers in order for all chapters.
+	trackers := make([]*progress.Tracker, len(chapters))
+	for i, chap := range chapters {
+		barTitle := fmt.Sprintf("%s - %s", truncateString(title, mangaLen), truncateString(chap.GetTitle(), chapterLen))
+		// Initial tracker covers only the fetching phase (80 ticks).
+		tracker := &progress.Tracker{
+			Message:            barTitle + " [Fetching]",
+			Total:              80,
+			RemoveOnCompletion: false, // Keep completed trackers visible.
+		}
+		trackers[i] = tracker
+		pw.AppendTracker(tracker)
+	}
+
+	// Process chapters concurrently although update the corresponding tracker.
+	wg = sync.WaitGroup{}
+	for i, chap := range chapters {
 		guard <- struct{}{}
 		wg.Add(1)
-		go func(chap grabber.Filterable) {
+		go func(chap grabber.Filterable, tracker *progress.Tracker, barTitle string) {
 			defer wg.Done()
-			barTitle := fmt.Sprintf("%s - %s", truncateString(title, mangaLen), truncateString(chap.GetTitle(), chapterLen))
 
 			// --- Fetching Phase ---
-			// Set Total to 80 ticks (about 20 seconds at 250ms per tick).
-			fetchingTracker := progress.Tracker{
-				Message: barTitle + " [Fetching]",
-				Total:   80,
-			}
-			pw.AppendTracker(&fetchingTracker)
-
 			var chapter *grabber.Chapter
 			if fetcher, ok := s.(interface {
 				FetchChapterWithProgress(grabber.Filterable, func()) (*grabber.Chapter, error)
 			}); ok {
 				chapter, err = fetcher.FetchChapterWithProgress(chap, func() {
-					fetchingTracker.Increment(1)
+					tracker.Increment(1)
 				})
 			} else {
 				chapter, err = s.FetchChapter(chap)
@@ -172,57 +186,58 @@ func Run(cmd *cobra.Command, args []string) {
 				<-guard
 				return
 			}
-			fetchingTracker.MarkAsDone()
+			// Fetching done. Now update the total ticks based on the chapter's pages.
+			downloadingTicks := chapter.PagesCount
+			archivingTicks := chapter.PagesCount
+			newTotal := int64(80) + downloadingTicks
+			if !settings.Bundle {
+				newTotal += archivingTicks
+			}
+			tracker.Total = newTotal
 
 			// --- Downloading Phase ---
-			downloadingTracker := progress.Tracker{
-				Message: barTitle + " [Downloading]",
-				Total:   chapter.PagesCount,
-			}
-			pw.AppendTracker(&downloadingTracker)
+			tracker.UpdateMessage(barTitle + " [Downloading]")
 			files, err := downloader.FetchChapter(s, chapter, func(page int, progressValue int, err error) {
 				if err != nil {
-					downloadingTracker.Message = barTitle + " [Error: " + err.Error() + "]"
+					tracker.UpdateMessage(barTitle + " [Downloading: Error " + err.Error() + "]")
 				} else {
-					downloadingTracker.Increment(1)
+					tracker.Increment(1)
 				}
 			})
 			if err != nil {
 				color.Red("- error downloading chapter %s: %s", chapter.GetTitle(), err.Error())
-				downloadingTracker.Message = barTitle + " [Download Failed]"
+				tracker.UpdateMessage(barTitle + " [Download Failed]")
 				<-guard
 				return
 			}
-			downloadingTracker.MarkAsDone()
 
-			d := &packer.DownloadedChapter{
-				Chapter: chapter,
-				Files:   files,
-			}
+			// --- Archiving Phase (if not bundling) ---
 			if !settings.Bundle {
-				archiveTracker := progress.Tracker{
-					Message: barTitle + " [Archiving]",
-					Total:   chapter.PagesCount,
+				tracker.UpdateMessage(barTitle + " [Archiving]")
+				// Create a DownloadedChapter struct for archiving.
+				d := &packer.DownloadedChapter{
+					Chapter: chapter,
+					Files:   files,
 				}
-				pw.AppendTracker(&archiveTracker)
 				_, err := packer.PackSingle(settings.OutputDir, s, d, func(page, _ int) {
-					archiveTracker.Increment(1)
+					tracker.Increment(1)
 				})
 				if err != nil {
 					color.Red(err.Error())
 				}
-				archiveTracker.MarkAsDone()
-			} else {
-				downloaded = append(downloaded, d)
 			}
+			tracker.MarkAsDone()
 			<-guard
-		}(chap)
+		}(chap, trackers[i], fmt.Sprintf("%s - %s", truncateString(title, mangaLen), truncateString(chap.GetTitle(), chapterLen)))
 	}
 	wg.Wait()
+
+	// (If not bundling, stop the progress writer now.)
 	if !settings.Bundle {
 		pw.Stop()
 		os.Exit(0)
 	}
+
 	downloaded = downloaded.SortByNumber()
 	dc := []*packer.DownloadedChapter{}
 	totalPages := 0

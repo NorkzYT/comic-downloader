@@ -20,7 +20,7 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Shows the version of the application",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("%s - Comic volumes downloading tool\n", color.YellowString("Comic Downloader"))
+		fmt.Printf("%s - Comic downloading tool\n", color.YellowString("Comic Downloader"))
 		fmt.Printf("All Rights Reserved © 2025-2026 %s\n", color.HiBlackString("Richard Lora"))
 		fmt.Printf("Version: %s - ", color.MagentaString("%s (%s)", Version, Tag))
 
