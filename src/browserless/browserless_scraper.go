@@ -38,29 +38,71 @@ func NewRemoteContext(devtoolsWsURL string, timeout time.Duration) (context.Cont
 // sleeps for the specified duration (if any), and then evaluates the provided JavaScript snippet.
 // The result of the evaluation is stored in the 'result' pointer.
 func RunJS(url string, waitSelector string, sleepDuration time.Duration, js string, result interface{}) error {
-	// Create a remote chromedp context with a 30-second timeout.
 	ctx, cancel, err := NewRemoteContext("", 30*time.Second)
 	if err != nil {
 		return err
 	}
 	defer cancel()
-
-	// Build the list of chromedp tasks.
 	tasks := []chromedp.Action{
-		// Navigate to the target URL.
 		chromedp.Navigate(url),
 	}
-	// If a waitSelector is provided, wait until that element is visible.
 	if waitSelector != "" {
 		tasks = append(tasks, chromedp.WaitVisible(waitSelector, chromedp.ByQuery))
 	}
-	// Optionally wait for a fixed duration (useful if additional time is needed for JS to load).
 	if sleepDuration > 0 {
 		tasks = append(tasks, chromedp.Sleep(sleepDuration))
 	}
-	// Finally, evaluate the provided JavaScript snippet.
 	tasks = append(tasks, chromedp.Evaluate(js, result))
-
-	// Run all tasks sequentially.
 	return chromedp.Run(ctx, tasks...)
+}
+
+// FetchStringWithProgress wraps a RunJS call that returns a string.
+// It starts a separate goroutine that calls progressCallback every 250ms until the JS call completes.
+func FetchStringWithProgress(url, waitSelector, js string, timeout time.Duration, progressCallback func()) (string, error) {
+	done := make(chan struct{})
+	// Start ticker goroutine that calls the callback every 250ms.
+	go func() {
+		ticker := time.NewTicker(250 * time.Millisecond)
+		defer ticker.Stop()
+		for {
+			select {
+			case <-ticker.C:
+				if progressCallback != nil {
+					progressCallback()
+				}
+			case <-done:
+				return
+			}
+		}
+	}()
+
+	var res string
+	err := RunJS(url, waitSelector, timeout, js, &res)
+	close(done)
+	return res, err
+}
+
+// FetchStringSliceWithProgress wraps a RunJS call that returns a []string.
+// It starts a separate goroutine that calls progressCallback every 250ms until the JS call completes.
+func FetchStringSliceWithProgress(url, waitSelector, js string, timeout time.Duration, progressCallback func()) ([]string, error) {
+	done := make(chan struct{})
+	go func() {
+		ticker := time.NewTicker(250 * time.Millisecond)
+		defer ticker.Stop()
+		for {
+			select {
+			case <-ticker.C:
+				if progressCallback != nil {
+					progressCallback()
+				}
+			case <-done:
+				return
+			}
+		}
+	}()
+
+	var res []string
+	err := RunJS(url, waitSelector, timeout, js, &res)
+	close(done)
+	return res, err
 }

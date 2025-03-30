@@ -107,37 +107,37 @@ func (m *PlainHTML) Test() (bool, error) {
 	// Iterate over the selectors and log each test.
 	for _, selector := range selectors {
 		// Log the Title extraction result.
-		titleText := m.doc.Find(selector.Title).Text()
-		fmt.Printf("Testing selector for Title: '%s' -> '%s'\n", selector.Title, titleText)
+		// titleText := m.doc.Find(selector.Title).Text()
+		// fmt.Printf("Testing selector for Title: '%s' -> '%s'\n", selector.Title, titleText)
 
 		// Find the chapter rows.
 		rows := m.doc.Find(selector.Rows)
-		fmt.Printf("Testing selector for Rows: '%s' found %d elements\n", selector.Rows, rows.Length())
+		// fmt.Printf("Testing selector for Rows: '%s' found %d elements\n", selector.Rows, rows.Length())
 
 		if rows.Length() > 0 {
 			// For the first chapter row, test the Chapter, ChapterTitle, and Link selectors.
-			firstRow := rows.First()
+			// firstRow := rows.First()
 
-			chapterElem := firstRow.Find(selector.Chapter)
-			fmt.Printf("Testing selector for Chapter in first row: '%s' -> '%s'\n", selector.Chapter, chapterElem.Text())
+			// chapterElem := firstRow.Find(selector.Chapter)
+			// fmt.Printf("Testing selector for Chapter in first row: '%s' -> '%s'\n", selector.Chapter, chapterElem.Text())
 
-			chapterTitleElem := firstRow.Find(selector.ChapterTitle)
-			fmt.Printf("Testing selector for ChapterTitle in first row: '%s' -> '%s'\n", selector.ChapterTitle, chapterTitleElem.Text())
+			// chapterTitleElem := firstRow.Find(selector.ChapterTitle)
+			// fmt.Printf("Testing selector for ChapterTitle in first row: '%s' -> '%s'\n", selector.ChapterTitle, chapterTitleElem.Text())
 
-			linkElem := firstRow.Find(selector.Link)
-			href := linkElem.AttrOr("href", "")
-			fmt.Printf("Testing selector for Link in first row: '%s' -> href: '%s'\n", selector.Link, href)
+			// linkElem := firstRow.Find(selector.Link)
+			// href := linkElem.AttrOr("href", "")
+			// fmt.Printf("Testing selector for Link in first row: '%s' -> href: '%s'\n", selector.Link, href)
 
 			// When a selector matches (Rows found), set the current selector and break.
 			m.rows = rows
 			m.site = selector
-			fmt.Printf("Selector matched: %+v\n", selector)
+			// fmt.Printf("Selector matched: %+v\n", selector)
 			break
 		}
 	}
 
 	if m.rows == nil || m.rows.Length() == 0 {
-		fmt.Println("No matching elements found with any selector")
+		// fmt.Println("No matching elements found with any selector")
 		return false, nil
 	}
 	return m.rows.Length() > 0, nil

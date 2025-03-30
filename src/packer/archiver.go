@@ -17,7 +17,7 @@ type Archiver interface {
 }
 
 // NewArchiver returns an Archiver implementation based on the provided format.
-// Supported formats are: "cbz", "zip", "raw", "epub" and "cbr".
+// Supported formats are: "cbz", "zip", and "raw".
 func NewArchiver(format string) (Archiver, error) {
 	switch format {
 	case "cbz":
@@ -28,8 +28,6 @@ func NewArchiver(format string) (Archiver, error) {
 		return &RAWArchiver{}, nil
 	// case "epub":
 	// 	return &EPUBArchiver{}, nil
-	case "cbr":
-		return &CBRArchiver{}, nil
 	default:
 		return nil, fmt.Errorf("unsupported archive format: %s", format)
 	}

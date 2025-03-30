@@ -8,12 +8,8 @@ services:
     restart: unless-stopped
     environment:
       - TOKEN=${TOKEN}
-      - CONCURRENT=2
       - TIMEOUT=300000
-      - QUEUED=10
       - HEALTH=true
-      - MAX_MEMORY_PERCENT=90
-      - MAX_CPU_PERCENT=80
       - ALLOW_GET=true
       - ALLOW_FILE_PROTOCOL=true
       - METRICS_JSON_PATH=/root/metrics.json

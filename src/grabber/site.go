@@ -33,7 +33,7 @@ type Settings struct {
 	Range string
 	// OutputDir is the output directory for the downloaded files
 	OutputDir string
-	// New field: archive format ("cbz", "zip", "raw", "epub", "cbr")
+	// Archive format ("cbz", "zip", "raw")
 	Format string
 }
 
