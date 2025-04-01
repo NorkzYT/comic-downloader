@@ -12,6 +12,7 @@ import (
 
 	"github.com/NorkzYT/comic-downloader/src/downloader"
 	"github.com/NorkzYT/comic-downloader/src/grabber"
+	"github.com/NorkzYT/comic-downloader/src/logger"
 	"github.com/NorkzYT/comic-downloader/src/packer"
 	"github.com/NorkzYT/comic-downloader/src/ranges"
 	"github.com/fatih/color"
@@ -28,8 +29,7 @@ var settings grabber.Settings
 var rootCmd = &cobra.Command{
 	Use:   "comic-downloader [flags] [url] [ranges]",
 	Short: "Helps you download mangas from websites to CBZ files",
-
-	Long: `With comic-downloader you can easily convert/download web based mangas to CBZ files.
+	Long: `With comic-downloader you can easily convert/download web based comic files.
 
 You only need to specify the URL of the comic and the chapters you want to download as a range.
 
@@ -62,15 +62,17 @@ Note arguments aren't really positional, you can specify them in any order:
 }
 
 func Run(cmd *cobra.Command, args []string) {
+	logger.Debug("rootCmd.Run: Starting execution with args: %v", args)
 	s, errs := grabber.NewSite(getUrlArg(args), &settings)
 	if len(errs) > 0 {
-		color.Red("Errors testing site (a site may be down):")
+		logger.Error("rootCmd.Run: Errors testing site:")
 		for _, err := range errs {
-			color.Red(err.Error())
+			logger.Error("rootCmd.Run: %v", err)
 		}
 	}
 	if s == nil {
-		color.Yellow("Site not recognised")
+		logger.Info("rootCmd.Run: Site not recognised")
+		fmt.Println(color.YellowString("Site not recognised"))
 		os.Exit(1)
 	}
 	s.InitFlags(cmd)
@@ -84,9 +86,9 @@ func Run(cmd *cobra.Command, args []string) {
 
 	chapters, errs := s.FetchChapters()
 	if len(errs) > 0 {
-		color.Red("Errors fetching chapters:")
+		logger.Error("rootCmd.Run: Errors fetching chapters:")
 		for _, err := range errs {
-			color.Red(err.Error())
+			logger.Error("rootCmd.Run: %v", err)
 		}
 		os.Exit(1)
 	}
@@ -101,7 +103,8 @@ func Run(cmd *cobra.Command, args []string) {
 		}
 		_, err := prompt.Run()
 		if err != nil {
-			color.Yellow("Canceled by user")
+			logger.Info("rootCmd.Run: Download canceled by user")
+			fmt.Println(color.YellowString("Canceled by user"))
 			os.Exit(0)
 		}
 		rngs = []ranges.Range{{Begin: 1, End: int64(lastChapter)}}
@@ -112,15 +115,16 @@ func Run(cmd *cobra.Command, args []string) {
 	}
 	chapters = chapters.FilterRanges(rngs)
 	if err := os.MkdirAll(settings.OutputDir, 0755); err != nil {
-		color.Red("Error creating output directory: " + err.Error())
+		logger.Error("rootCmd.Run: Error creating output directory: %v", err)
+		fmt.Println(color.RedString("Error creating output directory: " + err.Error()))
 		os.Exit(1)
 	}
 	if len(chapters) == 0 {
-		color.Yellow("No chapters found for the specified ranges")
+		logger.Info("rootCmd.Run: No chapters found for the specified ranges")
+		fmt.Println(color.YellowString("No chapters found for the specified ranges"))
 		os.Exit(1)
 	}
 
-	// Initialize the progress writer with AutoStop disabled.
 	pw := progress.NewWriter()
 	pw.SetAutoStop(false)
 	pw.SetUpdateFrequency(100 * time.Millisecond)
@@ -137,7 +141,6 @@ func Run(cmd *cobra.Command, args []string) {
 	pw.Style().Visibility.Value = true
 
 	// Sorts by the Message alphabetically in ascending order.
-	// https://github.com/jedib0t/go-pretty/blob/18e8a019b34e7e802e7f0c2cd78d2f63f7840689/progress/tracker_sort.go#L13
 	pw.SetSortBy(progress.SortByMessage)
 
 	go pw.Render()
@@ -147,7 +150,6 @@ func Run(cmd *cobra.Command, args []string) {
 	termWidth := getTerminalWidth()
 	mangaLen, chapterLen := calculateTitleLengths(termWidth)
 
-	// Pre-create trackers for all chapters.
 	trackers := make([]*progress.Tracker, len(chapters))
 	for i, chap := range chapters {
 		barTitle := fmt.Sprintf("%s - %s", truncateString(title, mangaLen), truncateString(chap.GetTitle(), chapterLen))
@@ -160,19 +162,16 @@ func Run(cmd *cobra.Command, args []string) {
 		pw.AppendTracker(tracker)
 	}
 
-	// Declare a mutex and a slice for bundled chapters.
 	var mu sync.Mutex
 	var bundledChapters []*packer.DownloadedChapter
 
-	// Process chapters concurrently.
 	for i, chap := range chapters {
 		guard <- struct{}{}
 		wg.Add(1)
 		go func(chap grabber.Filterable, tracker *progress.Tracker, barTitle string) {
-			var err error // declare err locally
+			var err error
 			defer wg.Done()
 
-			// --- Fetching Phase ---
 			var chapter *grabber.Chapter
 			if fetcher, ok := s.(interface {
 				FetchChapterWithProgress(grabber.Filterable, func()) (*grabber.Chapter, error)
@@ -184,12 +183,12 @@ func Run(cmd *cobra.Command, args []string) {
 				chapter, err = s.FetchChapter(chap)
 			}
 			if err != nil {
-				color.Red("- error fetching chapter %s: %s", chap.GetTitle(), err.Error())
+				logger.Error("rootCmd.Run: Error fetching chapter %s: %v", chap.GetTitle(), err)
+				tracker.UpdateMessage(barTitle + " [Download Failed]")
 				<-guard
 				return
 			}
 
-			// Update the progress ticks based on the chapter's pages.
 			downloadingTicks := chapter.PagesCount
 			archivingTicks := chapter.PagesCount
 			newTotal := int64(80) + downloadingTicks
@@ -198,7 +197,6 @@ func Run(cmd *cobra.Command, args []string) {
 			}
 			tracker.Total = newTotal
 
-			// --- Downloading Phase ---
 			tracker.UpdateMessage(barTitle + " [Downloading]")
 			files, err := downloader.FetchChapter(s, chapter, func(page int, progressValue int, err error) {
 				if err != nil {
@@ -208,15 +206,13 @@ func Run(cmd *cobra.Command, args []string) {
 				}
 			})
 			if err != nil {
-				color.Red("- error downloading chapter %s: %s", chapter.GetTitle(), err.Error())
+				logger.Error("rootCmd.Run: Error downloading chapter %s: %v", chapter.GetTitle(), err)
 				tracker.UpdateMessage(barTitle + " [Download Failed]")
 				<-guard
 				return
 			}
 
-			// --- Archiving Phase ---
 			if settings.Bundle {
-				// Append the downloaded chapter for later bundling.
 				mu.Lock()
 				bundledChapters = append(bundledChapters, &packer.DownloadedChapter{
 					Chapter: chapter,
@@ -224,7 +220,6 @@ func Run(cmd *cobra.Command, args []string) {
 				})
 				mu.Unlock()
 			} else {
-				// Archive the chapter immediately.
 				tracker.UpdateMessage(barTitle + " [Archiving]")
 				d := &packer.DownloadedChapter{
 					Chapter: chapter,
@@ -234,7 +229,7 @@ func Run(cmd *cobra.Command, args []string) {
 					tracker.Increment(1)
 				})
 				if err != nil {
-					color.Red(err.Error())
+					logger.Error("rootCmd.Run: Error archiving chapter: %v", err)
 				}
 			}
 			tracker.MarkAsDone()
@@ -243,13 +238,11 @@ func Run(cmd *cobra.Command, args []string) {
 	}
 	wg.Wait()
 
-	// If not bundling, exit now.
 	if !settings.Bundle {
 		pw.Stop()
 		os.Exit(0)
 	}
 
-	// --- Bundling Phase ---
 	sort.SliceStable(bundledChapters, func(i, j int) bool {
 		return bundledChapters[i].Chapter.Number < bundledChapters[j].Chapter.Number
 	})
@@ -263,12 +256,12 @@ func Run(cmd *cobra.Command, args []string) {
 	}
 	pw.AppendTracker(&bundleTracker)
 
-	// Call PackBundle using the bundled chapters and the chosen format.
 	filename, err := packer.PackBundle(settings.OutputDir, s, bundledChapters, settings.Range, func(page, _ int) {
 		bundleTracker.Increment(1)
 	})
 	if err != nil {
-		color.Red(err.Error())
+		logger.Error("rootCmd.Run: Error bundling chapters: %v", err)
+		fmt.Println(color.RedString(err.Error()))
 		os.Exit(1)
 	}
 	bundleTracker.MarkAsDone()
@@ -289,6 +282,7 @@ func Execute() {
 		FlagsDataType: cc.Italic,
 	})
 	if err := rootCmd.Execute(); err != nil {
+		logger.Error("rootCmd.Execute: %v", err)
 		fmt.Println(err)
 		os.Exit(1)
 	}
@@ -306,6 +300,7 @@ func init() {
 
 func cerr(err error, prefix string) {
 	if err != nil {
+		logger.Error("rootCmd.cerr: %s %v", prefix, err)
 		fmt.Println(color.RedString(prefix + err.Error()))
 		os.Exit(1)
 	}
@@ -380,10 +375,4 @@ func truncateString(input string, maxLength int) string {
 		return input[:maxLength] + "..."
 	}
 	return input[:truncationPoint] + "..."
-}
-
-func toMetaFunc(c *color.Color) func(string) string {
-	return func(s string) string {
-		return c.Sprint(s)
-	}
 }

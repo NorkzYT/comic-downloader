@@ -3,26 +3,26 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/NorkzYT/comic-downloader/src/logger"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/tcnksm/go-latest"
 )
 
 var (
-	// Tag is the git tag of the current build
+	// Tag is the git tag of the current build.
 	Tag = "develop"
-	// Version is the version of the current build
+	// Version is the version of the current build.
 	Version = "develop"
 )
 
-// versionCmd represents the version command
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Shows the version of the application",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("%s - Comic downloading tool\n", color.YellowString("Comic Downloader"))
-		fmt.Printf("All Rights Reserved © 2025-2026 %s\n", color.HiBlackString("Richard Lora"))
-		fmt.Printf("Version: %s - ", color.MagentaString("%s (%s)", Version, Tag))
+		logger.Info("Comic Downloader - Comic downloading tool")
+		logger.Info("All Rights Reserved © 2025-2026 %s", color.HiBlackString("Richard Lora"))
+		logger.Info("Version: %s - %s", Version, Tag)
 
 		vcheck := &latest.GithubTag{
 			Owner:             "NorkzYT",
@@ -32,10 +32,12 @@ var versionCmd = &cobra.Command{
 
 		res, err := latest.Check(vcheck, Tag)
 		if err != nil {
+			logger.Error("versionCmd: Error checking for updates: %v", err)
 			fmt.Printf("Error checking for updates: %s\n", err)
 			return
 		}
 		if res.Outdated {
+			logger.Info("versionCmd: App is outdated. Latest version: %s", res.Current)
 			fmt.Printf(
 				"%s Download latest (%s) from:\n%s\n",
 				color.HiRedString("App is outdated."),
@@ -43,6 +45,7 @@ var versionCmd = &cobra.Command{
 				"https://github.com/NorkzYT/comic-downloader/releases/tag/v"+res.Current,
 			)
 		} else {
+			logger.Info("versionCmd: App is up to date.")
 			fmt.Printf("%s\n", color.GreenString("App is up to date."))
 		}
 	},

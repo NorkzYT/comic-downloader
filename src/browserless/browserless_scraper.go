@@ -1,31 +1,23 @@
-// Package browserless provides generic functionality to perform
-// JavaScript evaluations on remote pages via chromedp (Browserless).
 package browserless
 
 import (
 	"context"
-	"log"
 	"os"
 	"time"
 
+	"github.com/NorkzYT/comic-downloader/src/logger"
 	"github.com/chromedp/chromedp"
 	"github.com/joho/godotenv"
 )
 
-// init loads the .env file from the project root.
-// If the file is not found or there is an error, it logs the error but continues.
 func init() {
 	if err := godotenv.Load(); err != nil {
-		log.Printf("No .env file found or error loading .env file: %v", err)
+		logger.Error("browserless: No .env file found or error loading .env: %v", err)
 	}
 }
 
 // NewRemoteContext creates a new chromedp context by connecting to a remote Browserless instance.
-// If devtoolsWsURL is empty, it first checks the DEVTOOLS_WS_URL environment variable.
-// If still empty, a default endpoint is used.
-// The timeout parameter defines how long the entire operation may take.
 func NewRemoteContext(devtoolsWsURL string, timeout time.Duration) (context.Context, context.CancelFunc, error) {
-	// If no URL provided, attempt to retrieve it from the environment.
 	if devtoolsWsURL == "" {
 		if envURL := os.Getenv("BROWSERLESS_URL"); envURL != "" {
 			devtoolsWsURL = envURL
@@ -33,29 +25,26 @@ func NewRemoteContext(devtoolsWsURL string, timeout time.Duration) (context.Cont
 			devtoolsWsURL = "ws://localhost:8454?token=6R0W53R135510"
 		}
 	}
-	// Create a parent context with a timeout.
 	parentCtx, cancelParent := context.WithTimeout(context.Background(), timeout)
-	// Create a remote allocator with the given devtools endpoint.
 	allocCtx, cancelAlloc := chromedp.NewRemoteAllocator(parentCtx, devtoolsWsURL, chromedp.NoModifyURL)
-	// Create a new chromedp context.
 	ctx, cancelCtx := chromedp.NewContext(allocCtx)
 
-	// Combine cancel functions so that all resources are cleaned up.
 	cancel := func() {
 		cancelCtx()
 		cancelAlloc()
 		cancelParent()
 	}
 
+	logger.Debug("browserless.NewRemoteContext: Created new remote context with URL: %s", devtoolsWsURL)
 	return ctx, cancel, nil
 }
 
 // RunJS navigates to the given URL, optionally waits for a CSS selector to be visible,
 // sleeps for the specified duration (if any), and then evaluates the provided JavaScript snippet.
-// The result of the evaluation is stored in the 'result' pointer.
 func RunJS(url string, waitSelector string, sleepDuration time.Duration, js string, result interface{}) error {
 	ctx, cancel, err := NewRemoteContext("", 30*time.Second)
 	if err != nil {
+		logger.Error("browserless.RunJS: Error creating remote context: %v", err)
 		return err
 	}
 	defer cancel()
@@ -69,14 +58,13 @@ func RunJS(url string, waitSelector string, sleepDuration time.Duration, js stri
 		tasks = append(tasks, chromedp.Sleep(sleepDuration))
 	}
 	tasks = append(tasks, chromedp.Evaluate(js, result))
+	logger.Debug("browserless.RunJS: Executing JS on URL: %s", url)
 	return chromedp.Run(ctx, tasks...)
 }
 
 // FetchStringWithProgress wraps a RunJS call that returns a string.
-// It starts a separate goroutine that calls progressCallback every 250ms until the JS call completes.
 func FetchStringWithProgress(url, waitSelector, js string, timeout time.Duration, progressCallback func()) (string, error) {
 	done := make(chan struct{})
-	// Start ticker goroutine that calls the callback every 250ms.
 	go func() {
 		ticker := time.NewTicker(250 * time.Millisecond)
 		defer ticker.Stop()
@@ -95,11 +83,15 @@ func FetchStringWithProgress(url, waitSelector, js string, timeout time.Duration
 	var res string
 	err := RunJS(url, waitSelector, timeout, js, &res)
 	close(done)
+	if err != nil {
+		logger.Error("browserless.FetchStringWithProgress: Error: %v", err)
+	} else {
+		logger.Debug("browserless.FetchStringWithProgress: Successfully fetched string result.")
+	}
 	return res, err
 }
 
 // FetchStringSliceWithProgress wraps a RunJS call that returns a []string.
-// It starts a separate goroutine that calls progressCallback every 250ms until the JS call completes.
 func FetchStringSliceWithProgress(url, waitSelector, js string, timeout time.Duration, progressCallback func()) ([]string, error) {
 	done := make(chan struct{})
 	go func() {
@@ -120,5 +112,10 @@ func FetchStringSliceWithProgress(url, waitSelector, js string, timeout time.Dur
 	var res []string
 	err := RunJS(url, waitSelector, timeout, js, &res)
 	close(done)
+	if err != nil {
+		logger.Error("browserless.FetchStringSliceWithProgress: Error: %v", err)
+	} else {
+		logger.Debug("browserless.FetchStringSliceWithProgress: Successfully fetched string slice result.")
+	}
 	return res, err
 }
