@@ -107,7 +107,7 @@ func Run(cmd *cobra.Command, args []string) {
 			fmt.Println(color.YellowString("Canceled by user"))
 			os.Exit(0)
 		}
-		rngs = []ranges.Range{{Begin: 1, End: int64(lastChapter)}}
+		rngs = []ranges.Range{{Begin: 1.0, End: lastChapter}}
 	} else {
 		settings.Range = getRangesArg(args)
 		rngs, err = ranges.Parse(settings.Range)

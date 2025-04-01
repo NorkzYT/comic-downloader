@@ -16,7 +16,7 @@ type Titleable interface {
 	GetTitle() string
 }
 
-// Filterable represents an filterable objects
+// Filterable represents a filterable object
 type Filterable interface {
 	Enumerable
 	Titleable
@@ -25,7 +25,7 @@ type Filterable interface {
 // Filterables represents a slice of Filterable
 type Filterables []Filterable
 
-// Filter allows to filter Filterables by the given condition
+// Filter allows filtering Filterables by the given condition.
 func (f Filterables) Filter(cond func(Filterable) bool) Filterables {
 	filtered := Filterables{}
 	for _, chap := range f {
@@ -37,19 +37,20 @@ func (f Filterables) Filter(cond func(Filterable) bool) Filterables {
 	return filtered
 }
 
-// FilterRanges returns the specified ranges of Filterables sorted by their Number
+// FilterRanges returns the specified ranges of Filterables sorted by their Number.
+// It now directly compares float64 values.
 func (f Filterables) FilterRanges(rngs []ranges.Range) Filterables {
 	chaps := Filterables{}
 	for _, r := range rngs {
 		chaps = append(chaps, f.Filter(func(c Filterable) bool {
-			return c.GetNumber() >= float64(r.Begin) && c.GetNumber() <= float64(r.End)
+			return c.GetNumber() >= r.Begin && c.GetNumber() <= r.End
 		})...)
 	}
 
 	return chaps
 }
 
-// SortByNumber sorts Filterables by Number
+// SortByNumber sorts Filterables by Number.
 func (f Filterables) SortByNumber() Filterables {
 	sort.Slice(f, func(i, j int) bool {
 		return f[i].GetNumber() < f[j].GetNumber()
