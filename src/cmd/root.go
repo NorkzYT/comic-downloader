@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"sort"
 	"strings"
 	"sync"
 	"syscall"
@@ -119,9 +120,9 @@ func Run(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	// Initialize the progress writer with AutoStop disabled
+	// Initialize the progress writer with AutoStop disabled.
 	pw := progress.NewWriter()
-	pw.SetAutoStop(false) // Disable auto-stop so completed trackers are not cleared
+	pw.SetAutoStop(false)
 	pw.SetUpdateFrequency(100 * time.Millisecond)
 	pw.SetStyle(progress.StyleBlocks)
 	pw.Style().Colors = progress.StyleColorsExample
@@ -143,31 +144,32 @@ func Run(cmd *cobra.Command, args []string) {
 
 	wg := sync.WaitGroup{}
 	guard := make(chan struct{}, s.GetMaxConcurrency().Chapters)
-	downloaded := grabber.Filterables{}
-
 	termWidth := getTerminalWidth()
 	mangaLen, chapterLen := calculateTitleLengths(termWidth)
 
-	// Pre-create trackers in order for all chapters.
+	// Pre-create trackers for all chapters.
 	trackers := make([]*progress.Tracker, len(chapters))
 	for i, chap := range chapters {
 		barTitle := fmt.Sprintf("%s - %s", truncateString(title, mangaLen), truncateString(chap.GetTitle(), chapterLen))
-		// Initial tracker covers only the fetching phase (80 ticks).
 		tracker := &progress.Tracker{
 			Message:            barTitle + " [Fetching]",
 			Total:              80,
-			RemoveOnCompletion: false, // Keep completed trackers visible.
+			RemoveOnCompletion: false,
 		}
 		trackers[i] = tracker
 		pw.AppendTracker(tracker)
 	}
 
-	// Process chapters concurrently although update the corresponding tracker.
-	wg = sync.WaitGroup{}
+	// Declare a mutex and a slice for bundled chapters.
+	var mu sync.Mutex
+	var bundledChapters []*packer.DownloadedChapter
+
+	// Process chapters concurrently.
 	for i, chap := range chapters {
 		guard <- struct{}{}
 		wg.Add(1)
 		go func(chap grabber.Filterable, tracker *progress.Tracker, barTitle string) {
+			var err error // declare err locally
 			defer wg.Done()
 
 			// --- Fetching Phase ---
@@ -186,7 +188,8 @@ func Run(cmd *cobra.Command, args []string) {
 				<-guard
 				return
 			}
-			// Fetching done. Now update the total ticks based on the chapter's pages.
+
+			// Update the progress ticks based on the chapter's pages.
 			downloadingTicks := chapter.PagesCount
 			archivingTicks := chapter.PagesCount
 			newTotal := int64(80) + downloadingTicks
@@ -211,10 +214,18 @@ func Run(cmd *cobra.Command, args []string) {
 				return
 			}
 
-			// --- Archiving Phase (if not bundling) ---
-			if !settings.Bundle {
+			// --- Archiving Phase ---
+			if settings.Bundle {
+				// Append the downloaded chapter for later bundling.
+				mu.Lock()
+				bundledChapters = append(bundledChapters, &packer.DownloadedChapter{
+					Chapter: chapter,
+					Files:   files,
+				})
+				mu.Unlock()
+			} else {
+				// Archive the chapter immediately.
 				tracker.UpdateMessage(barTitle + " [Archiving]")
-				// Create a DownloadedChapter struct for archiving.
 				d := &packer.DownloadedChapter{
 					Chapter: chapter,
 					Files:   files,
@@ -232,26 +243,28 @@ func Run(cmd *cobra.Command, args []string) {
 	}
 	wg.Wait()
 
-	// (If not bundling, stop the progress writer now.)
+	// If not bundling, exit now.
 	if !settings.Bundle {
 		pw.Stop()
 		os.Exit(0)
 	}
 
-	downloaded = downloaded.SortByNumber()
-	dc := []*packer.DownloadedChapter{}
+	// --- Bundling Phase ---
+	sort.SliceStable(bundledChapters, func(i, j int) bool {
+		return bundledChapters[i].Chapter.Number < bundledChapters[j].Chapter.Number
+	})
 	totalPages := 0
-	for _, d := range downloaded {
-		chapter := d.(*packer.DownloadedChapter)
-		dc = append(dc, chapter)
-		totalPages += int(chapter.PagesCount)
+	for _, d := range bundledChapters {
+		totalPages += int(d.Chapter.PagesCount)
 	}
 	bundleTracker := progress.Tracker{
 		Message: "Bundle [Archiving All Chapters]",
 		Total:   int64(totalPages),
 	}
 	pw.AppendTracker(&bundleTracker)
-	filename, err := packer.PackBundle(settings.OutputDir, s, dc, settings.Range, func(page, _ int) {
+
+	// Call PackBundle using the bundled chapters and the chosen format.
+	filename, err := packer.PackBundle(settings.OutputDir, s, bundledChapters, settings.Range, func(page, _ int) {
 		bundleTracker.Increment(1)
 	})
 	if err != nil {
@@ -281,16 +294,14 @@ func Execute() {
 	}
 }
 
-// init sets the flags for the root command
 func init() {
 	rootCmd.Flags().BoolVarP(&settings.Bundle, "bundle", "b", false, "bundle all specified chapters into a single file")
 	rootCmd.Flags().Uint8VarP(&settings.MaxConcurrency.Chapters, "concurrency", "c", 5, "number of concurrent chapter downloads, hard-limited to 5")
 	rootCmd.Flags().Uint8VarP(&settings.MaxConcurrency.Pages, "concurrency-pages", "C", 10, "number of concurrent page downloads, hard-limited to 10")
 	rootCmd.Flags().StringVarP(&settings.Language, "language", "l", "", "only download the specified language")
 	rootCmd.Flags().StringVarP(&settings.FilenameTemplate, "filename-template", "t", packer.FilenameTemplateDefault, "template for the resulting filename")
-	// set as persistent, so version command does not complain about the -o flag set via docker
 	rootCmd.PersistentFlags().StringVarP(&settings.OutputDir, "output-dir", "o", "./", "output directory for the downloaded files")
-	rootCmd.Flags().StringVarP(&settings.Format, "format", "f", "cbz", "archive format: cbz, zip, raw") // epub
+	rootCmd.Flags().StringVarP(&settings.Format, "format", "f", "cbz", "archive format: cbz, zip, raw")
 }
 
 func cerr(err error, prefix string) {

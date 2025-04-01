@@ -4,18 +4,34 @@ package browserless
 
 import (
 	"context"
+	"log"
+	"os"
 	"time"
 
 	"github.com/chromedp/chromedp"
+	"github.com/joho/godotenv"
 )
 
+// init loads the .env file from the project root.
+// If the file is not found or there is an error, it logs the error but continues.
+func init() {
+	if err := godotenv.Load(); err != nil {
+		log.Printf("No .env file found or error loading .env file: %v", err)
+	}
+}
+
 // NewRemoteContext creates a new chromedp context by connecting to a remote Browserless instance.
-// If devtoolsWsURL is empty, a default endpoint is used.
+// If devtoolsWsURL is empty, it first checks the DEVTOOLS_WS_URL environment variable.
+// If still empty, a default endpoint is used.
 // The timeout parameter defines how long the entire operation may take.
 func NewRemoteContext(devtoolsWsURL string, timeout time.Duration) (context.Context, context.CancelFunc, error) {
-	// Use default endpoint if none provided.
+	// If no URL provided, attempt to retrieve it from the environment.
 	if devtoolsWsURL == "" {
-		devtoolsWsURL = "ws://localhost:8454?token=6R0W53R135510"
+		if envURL := os.Getenv("BROWSERLESS_URL"); envURL != "" {
+			devtoolsWsURL = envURL
+		} else {
+			devtoolsWsURL = "ws://localhost:8454?token=6R0W53R135510"
+		}
 	}
 	// Create a parent context with a timeout.
 	parentCtx, cancelParent := context.WithTimeout(context.Background(), timeout)
