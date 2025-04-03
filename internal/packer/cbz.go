@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/NorkzYT/comic-downloader/src/downloader"
+	"github.com/NorkzYT/comic-downloader/internal/downloader"
 )
 
 // CBZArchiver creates a CBZ archive (.cbz file) from a set of images.

@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/NorkzYT/comic-downloader/src/grabber"
-	"github.com/NorkzYT/comic-downloader/src/http"
-	"github.com/NorkzYT/comic-downloader/src/logger"
+	"github.com/NorkzYT/comic-downloader/internal/grabber"
+	"github.com/NorkzYT/comic-downloader/internal/http"
+	"github.com/NorkzYT/comic-downloader/internal/logger"
 )
 
 // File represents a downloaded file.

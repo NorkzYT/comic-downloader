@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/NorkzYT/comic-downloader/src/downloader"
-	"github.com/NorkzYT/comic-downloader/src/grabber"
+	"github.com/NorkzYT/comic-downloader/internal/downloader"
+	"github.com/NorkzYT/comic-downloader/internal/grabber"
 )
 
 // DownloadedChapter represents a downloaded chapter (the chapter info along with its downloaded files).

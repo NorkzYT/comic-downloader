@@ -1,6 +1,7 @@
-comic-downloader
-*.cbz
+build
+output
 demos/*.yml
-
 node_modules
 .env
+bin
+.opencommit-commitlint

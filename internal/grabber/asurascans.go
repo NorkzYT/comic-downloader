@@ -7,12 +7,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/NorkzYT/comic-downloader/src/browserless"
-	"github.com/NorkzYT/comic-downloader/src/logger"
+	"github.com/NorkzYT/comic-downloader/internal/browserless"
+	"github.com/NorkzYT/comic-downloader/internal/logger"
 )
 
-// AsuraChromedp implements the Site interface for asuracomic.net using chromedp.
-type AsuraChromedp struct {
+// AsuraScans implements the Site interface for asuracomic.net using chromedp.
+type AsuraScans struct {
 	*Grabber
 	// Additional fields if needed.
 }
@@ -24,38 +24,42 @@ type AsuraChapter struct {
 }
 
 // Test verifies if the URL is from asuracomic.net.
-func (a *AsuraChromedp) Test() (bool, error) {
-	logger.Debug("AsuraChromedp.Test: Checking if URL contains 'asuracomic.net': %s", a.URL)
+func (a *AsuraScans) Test() (bool, error) {
+	logger.Debug("AsuraScans.Test: Checking if URL contains 'asuracomic.net': %s", a.URL)
 	return strings.Contains(a.URL, "asuracomic.net"), nil
 }
 
+func (a *AsuraScans) UsesBrowser() bool {
+	return true
+}
+
 // FetchTitle navigates to the series URL and extracts the comic title.
-func (a *AsuraChromedp) FetchTitle() (string, error) {
+func (a *AsuraScans) FetchTitle() (string, error) {
 	var title string
 	jsTitle := `document.querySelector("div.text-center.sm\\:text-left span.text-xl.font-bold") ? document.querySelector("div.text-center.sm\\:text-left span.text-xl.font-bold").innerText : ""`
-	logger.Debug("AsuraChromedp.FetchTitle: Running JS for title extraction on %s", a.URL)
+	logger.Debug("AsuraScans.FetchTitle: Running JS for title extraction on %s", a.URL)
 	err := browserless.RunJS(a.URL, "body", 0, jsTitle, &title)
 	if err != nil {
-		logger.Error("AsuraChromedp.FetchTitle: Error fetching title with selector: %v", err)
+		logger.Error("AsuraScans.FetchTitle: Error fetching title with selector: %v", err)
 		return "", fmt.Errorf("error fetching title with selector: %w", err)
 	}
 	title = strings.TrimSpace(title)
 	if title == "" {
 		jsDocTitle := `document.title`
-		logger.Debug("AsuraChromedp.FetchTitle: Title empty, falling back to document.title on %s", a.URL)
+		logger.Debug("AsuraScans.FetchTitle: Title empty, falling back to document.title on %s", a.URL)
 		err = browserless.RunJS(a.URL, "body", 0, jsDocTitle, &title)
 		if err != nil {
-			logger.Error("AsuraChromedp.FetchTitle: Error fetching document.title: %v", err)
+			logger.Error("AsuraScans.FetchTitle: Error fetching document.title: %v", err)
 			return "", fmt.Errorf("error fetching document.title: %w", err)
 		}
 		title = strings.TrimSpace(title)
 	}
-	logger.Debug("AsuraChromedp.FetchTitle: Fetched title: %s", title)
+	logger.Debug("AsuraScans.FetchTitle: Fetched title: %s", title)
 	return title, nil
 }
 
 // FetchChapters uses a JavaScript snippet to extract chapter data from the series page.
-func (a *AsuraChromedp) FetchChapters() (Filterables, []error) {
+func (a *AsuraScans) FetchChapters() (Filterables, []error) {
 	var chaptersJSON string
 	jsChapters := `(function(){
 		var chapters = [];
@@ -79,10 +83,10 @@ func (a *AsuraChromedp) FetchChapters() (Filterables, []error) {
 		}
 		return JSON.stringify(chapters);
 	})();`
-	logger.Debug("AsuraChromedp.FetchChapters: Executing JS to fetch chapters on %s", a.URL)
+	logger.Debug("AsuraScans.FetchChapters: Executing JS to fetch chapters on %s", a.URL)
 	err := browserless.RunJS(a.URL, "div.overflow-y-auto", 5*time.Second, jsChapters, &chaptersJSON)
 	if err != nil {
-		logger.Error("AsuraChromedp.FetchChapters: Error extracting chapters: %v", err)
+		logger.Error("AsuraScans.FetchChapters: Error extracting chapters: %v", err)
 		return nil, []error{fmt.Errorf("error extracting chapters: %w", err)}
 	}
 	var rawChapters []struct {
@@ -91,13 +95,13 @@ func (a *AsuraChromedp) FetchChapters() (Filterables, []error) {
 		URL    string  `json:"url"`
 	}
 	if err = json.Unmarshal([]byte(chaptersJSON), &rawChapters); err != nil {
-		logger.Error("AsuraChromedp.FetchChapters: Error parsing chapters JSON: %v", err)
+		logger.Error("AsuraScans.FetchChapters: Error parsing chapters JSON: %v", err)
 		return nil, []error{fmt.Errorf("error parsing chapters JSON: %w", err)}
 	}
 	chapters := make(Filterables, 0, len(rawChapters))
 	for _, c := range rawChapters {
 		if c.URL == "" {
-			logger.Debug("AsuraChromedp.FetchChapters: Skipping chapter with empty URL.")
+			logger.Debug("AsuraScans.FetchChapters: Skipping chapter with empty URL.")
 			continue
 		}
 		ac := &AsuraChapter{
@@ -107,7 +111,7 @@ func (a *AsuraChromedp) FetchChapters() (Filterables, []error) {
 			},
 			URL: c.URL,
 		}
-		logger.Debug("AsuraChromedp.FetchChapters: Found chapter: %s", ac.Title)
+		logger.Debug("AsuraScans.FetchChapters: Found chapter: %s", ac.Title)
 		chapters = append(chapters, ac)
 	}
 	return chapters, nil
@@ -115,16 +119,16 @@ func (a *AsuraChromedp) FetchChapters() (Filterables, []error) {
 
 // FetchChapterWithProgress navigates to a chapter URL and extracts image URLs,
 // calling the provided progressCallback during long-running evaluations.
-func (a *AsuraChromedp) FetchChapterWithProgress(f Filterable, progressCallback func()) (*Chapter, error) {
+func (a *AsuraScans) FetchChapterWithProgress(f Filterable, progressCallback func()) (*Chapter, error) {
 	ac, ok := f.(*AsuraChapter)
 	if !ok {
-		logger.Error("AsuraChromedp.FetchChapterWithProgress: Invalid chapter type")
+		logger.Error("AsuraScans.FetchChapterWithProgress: Invalid chapter type")
 		return nil, fmt.Errorf("invalid chapter type")
 	}
-	logger.Debug("AsuraChromedp.FetchChapterWithProgress: Fetching chapter with URL: %s", ac.URL)
+	logger.Debug("AsuraScans.FetchChapterWithProgress: Fetching chapter with URL: %s", ac.URL)
 	_, err := browserless.FetchStringWithProgress(ac.URL, "body", `document.documentElement.outerHTML`, 10*time.Second, progressCallback)
 	if err != nil {
-		logger.Error("AsuraChromedp.FetchChapterWithProgress: Failed to fetch chapter page: %v", err)
+		logger.Error("AsuraScans.FetchChapterWithProgress: Failed to fetch chapter page: %v", err)
 		return nil, fmt.Errorf("failed to fetch chapter page: %w", err)
 	}
 
@@ -143,11 +147,11 @@ func (a *AsuraChromedp) FetchChapterWithProgress(f Filterable, progressCallback 
 	})();`
 	imageSrcs, err = browserless.FetchStringSliceWithProgress(ac.URL, "body", jsImages, 10*time.Second, progressCallback)
 	if err != nil {
-		logger.Error("AsuraChromedp.FetchChapterWithProgress: Failed to extract image URLs: %v", err)
+		logger.Error("AsuraScans.FetchChapterWithProgress: Failed to extract image URLs: %v", err)
 		return nil, fmt.Errorf("failed to extract image URLs: %w", err)
 	}
 	if len(imageSrcs) == 0 {
-		logger.Error("AsuraChromedp.FetchChapterWithProgress: No images found on chapter page")
+		logger.Error("AsuraScans.FetchChapterWithProgress: No images found on chapter page")
 		return nil, fmt.Errorf("no images found on chapter page")
 	}
 
@@ -165,36 +169,36 @@ func (a *AsuraChromedp) FetchChapterWithProgress(f Filterable, progressCallback 
 		Pages:      pages,
 		Language:   "en",
 	}
-	logger.Debug("AsuraChromedp.FetchChapterWithProgress: Successfully fetched chapter: %s", chapter.Title)
+	logger.Debug("AsuraScans.FetchChapterWithProgress: Successfully fetched chapter: %s", chapter.Title)
 	return chapter, nil
 }
 
 // FetchChapter implements the Site interface by calling FetchChapterWithProgress with a no-op callback.
-func (a *AsuraChromedp) FetchChapter(f Filterable) (*Chapter, error) {
+func (a *AsuraScans) FetchChapter(f Filterable) (*Chapter, error) {
 	return a.FetchChapterWithProgress(f, func() {})
 }
 
 // BaseUrl returns the base URL for asuracomic.net derived from the chapter URL.
-func (a *AsuraChromedp) BaseUrl() string {
+func (a *AsuraScans) BaseUrl() string {
 	u, err := url.Parse(a.URL)
 	if err != nil {
-		logger.Error("AsuraChromedp.BaseUrl: Error parsing URL: %v", err)
+		logger.Error("AsuraScans.BaseUrl: Error parsing URL: %v", err)
 		return ""
 	}
 	return u.Scheme + "://" + u.Host
 }
 
 // GetFilenameTemplate returns the filename template.
-func (a *AsuraChromedp) GetFilenameTemplate() string {
+func (a *AsuraScans) GetFilenameTemplate() string {
 	return a.Settings.FilenameTemplate
 }
 
 // GetMaxConcurrency returns the max concurrency settings.
-func (a *AsuraChromedp) GetMaxConcurrency() MaxConcurrency {
+func (a *AsuraScans) GetMaxConcurrency() MaxConcurrency {
 	return a.Settings.MaxConcurrency
 }
 
 // GetPreferredLanguage returns the preferred language.
-func (a *AsuraChromedp) GetPreferredLanguage() string {
+func (a *AsuraScans) GetPreferredLanguage() string {
 	return a.Settings.Language
 }

@@ -5,10 +5,14 @@ import (
 	"os"
 	"time"
 
-	"github.com/NorkzYT/comic-downloader/src/logger"
+	"github.com/NorkzYT/comic-downloader/internal/logger"
 	"github.com/chromedp/chromedp"
 	"github.com/joho/godotenv"
 )
+
+type BrowserlessUser interface {
+	UsesBrowser() bool
+}
 
 func init() {
 	if err := godotenv.Load(); err != nil {

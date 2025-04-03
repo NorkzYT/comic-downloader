@@ -6,7 +6,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/NorkzYT/comic-downloader/src/grabber"
+	"github.com/NorkzYT/comic-downloader/internal/grabber"
 )
 
 // FilenameTemplateParts represents the parts of a filename

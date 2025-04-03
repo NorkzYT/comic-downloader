@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/NorkzYT/comic-downloader/src/downloader"
+	"github.com/NorkzYT/comic-downloader/internal/downloader"
 )
 
 // RAWArchiver simply writes each image file to a folder without archiving.

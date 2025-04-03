@@ -3,12 +3,9 @@ package grabber
 import (
 	"errors"
 	"net/url"
-	"regexp"
-	"strconv"
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/pflag"
 )
 
 // Grabber is the base struct for all grabbers/sites
@@ -70,12 +67,12 @@ type Site interface {
 // IdentifySite returns the site passing the Test() for the specified url
 func (g *Grabber) IdentifySite() (Site, []error) {
 	sites := []Site{
-		&AsuraChromedp{Grabber: g},
-		&ReaperScans{Grabber: g},
+		&AsuraScans{Grabber: g},
 		&CypherScans{Grabber: g},
-		&MangamonkChromedp{Grabber: g},
 		&Inmanga{Grabber: g},
 		&Mangadex{Grabber: g},
+		&Mangamonk{Grabber: g},
+		&ReaperScans{Grabber: g},
 	}
 	var errs []error
 
@@ -145,19 +142,4 @@ func NewSite(url string, settings *Settings) (Site, []error) {
 	}
 
 	return g.IdentifySite()
-}
-
-// getUuid returns the first uuid found in the passed string
-func getUuid(s string) string {
-	re := regexp.MustCompile(`([\w\d]{8}(:?-[\w\d]{4}){3}-[\w\d]{12})`)
-	return re.FindString(s)
-}
-
-// maxUint8Flag returns the max value between the flag uint8 value and the passed max
-func maxUint8Flag(flag *pflag.Flag, max uint8) uint8 {
-	v, _ := strconv.ParseUint(flag.Value.String(), 10, 8)
-	if v > uint64(max) {
-		return max
-	}
-	return uint8(v)
 }

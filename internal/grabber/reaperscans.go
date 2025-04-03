@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/NorkzYT/comic-downloader/src/http"
-	"github.com/NorkzYT/comic-downloader/src/logger"
+	"github.com/NorkzYT/comic-downloader/internal/http"
+	"github.com/NorkzYT/comic-downloader/internal/logger"
 	"github.com/PuerkitoBio/goquery"
 )
 

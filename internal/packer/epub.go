@@ -13,7 +13,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/NorkzYT/comic-downloader/src/downloader"
+	"github.com/NorkzYT/comic-downloader/internal/downloader"
 )
 
 // EPUBArchiver converts a chapter into an EPUB file.

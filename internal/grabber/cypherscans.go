@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/NorkzYT/comic-downloader/src/browserless"
-	"github.com/NorkzYT/comic-downloader/src/http"
-	"github.com/NorkzYT/comic-downloader/src/logger"
+	"github.com/NorkzYT/comic-downloader/internal/browserless"
+	"github.com/NorkzYT/comic-downloader/internal/http"
+	"github.com/NorkzYT/comic-downloader/internal/logger"
 	"github.com/PuerkitoBio/goquery"
 )
 
@@ -23,6 +23,10 @@ type CypherScans struct {
 func (c *CypherScans) Test() (bool, error) {
 	logger.Debug("CypherScans.Test: Checking if URL contains 'cypheroscans.xyz': %s", c.URL)
 	return strings.Contains(c.URL, "cypheroscans.xyz"), nil
+}
+
+func (a *CypherScans) UsesBrowser() bool {
+	return true
 }
 
 // FetchTitle retrieves the manga title by parsing the HTML content.

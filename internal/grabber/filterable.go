@@ -3,7 +3,7 @@ package grabber
 import (
 	"sort"
 
-	"github.com/NorkzYT/comic-downloader/src/ranges"
+	"github.com/NorkzYT/comic-downloader/internal/ranges"
 )
 
 // Enumerable represents an object that can be enumerated

@@ -3,7 +3,7 @@ package packer
 import (
 	"fmt"
 
-	"github.com/NorkzYT/comic-downloader/src/downloader"
+	"github.com/NorkzYT/comic-downloader/internal/downloader"
 )
 
 // Archiver defines the interface for packaging downloaded files.

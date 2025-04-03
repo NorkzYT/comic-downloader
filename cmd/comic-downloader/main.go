@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"fmt"
@@ -10,11 +10,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/NorkzYT/comic-downloader/src/downloader"
-	"github.com/NorkzYT/comic-downloader/src/grabber"
-	"github.com/NorkzYT/comic-downloader/src/logger"
-	"github.com/NorkzYT/comic-downloader/src/packer"
-	"github.com/NorkzYT/comic-downloader/src/ranges"
+	"github.com/NorkzYT/comic-downloader/internal/downloader"
+	"github.com/NorkzYT/comic-downloader/internal/grabber"
+	"github.com/NorkzYT/comic-downloader/internal/logger"
+	"github.com/NorkzYT/comic-downloader/internal/packer"
+	"github.com/NorkzYT/comic-downloader/internal/ranges"
 	"github.com/fatih/color"
 	"github.com/jedib0t/go-pretty/v6/progress"
 	"github.com/manifoldco/promptui"
@@ -25,6 +25,10 @@ import (
 )
 
 var settings grabber.Settings
+
+type BrowserlessUser interface {
+	UsesBrowser() bool
+}
 
 var rootCmd = &cobra.Command{
 	Use:   "comic-downloader [flags] [url] [ranges]",
@@ -54,14 +58,16 @@ Would download chapters 10 to 20 of Black Clover from mangadex.org in Spanish.
 
 It would also download chapters 10 to 20 of Black Clover from mangadex.org in Spanish, although in this case would bundle them into a single file.
 
-Note arguments aren't really positional, you can specify them in any order:
+Note arguments aren't positional, thus you can specify them in any order:
 
-  comic-downloader --language es 10-20 https://mangadex.org/title/e7eabe96-aa17-476f-b431-2497d5e9d060/black-clover --bundle`),
+comic-downloader --language es 10-20 https://mangadex.org/title/e7eabe96-aa17-476f-b431-2497d5e9d060/black-clover --bundle
+
+Would download and bundle chapters 10 to 20 of Black Clover from mangadex.org in Spanish.`),
 	Args: cobra.MinimumNArgs(1),
-	Run:  Run,
+	Run:  run,
 }
 
-func Run(cmd *cobra.Command, args []string) {
+func run(cmd *cobra.Command, args []string) {
 	logger.Debug("rootCmd.Run: Starting execution with args: %v", args)
 	s, errs := grabber.NewSite(getUrlArg(args), &settings)
 	if len(errs) > 0 {
@@ -77,7 +83,7 @@ func Run(cmd *cobra.Command, args []string) {
 	}
 	s.InitFlags(cmd)
 
-	if _, ok := s.(*grabber.AsuraChromedp); ok {
+	if bl, ok := s.(BrowserlessUser); ok && bl.UsesBrowser() {
 		fmt.Println("Initializing remote browser; please wait...")
 	}
 
@@ -140,7 +146,6 @@ func Run(cmd *cobra.Command, args []string) {
 	pw.Style().Visibility.TrackerOverall = true
 	pw.Style().Visibility.Value = true
 
-	// Sorts by the Message alphabetically in ascending order.
 	pw.SetSortBy(progress.SortByMessage)
 
 	go pw.Render()
@@ -169,10 +174,9 @@ func Run(cmd *cobra.Command, args []string) {
 		guard <- struct{}{}
 		wg.Add(1)
 		go func(chap grabber.Filterable, tracker *progress.Tracker, barTitle string) {
-			var err error
 			defer wg.Done()
-
 			var chapter *grabber.Chapter
+			var err error
 			if fetcher, ok := s.(interface {
 				FetchChapterWithProgress(grabber.Filterable, func()) (*grabber.Chapter, error)
 			}); ok {
@@ -375,4 +379,8 @@ func truncateString(input string, maxLength int) string {
 		return input[:maxLength] + "..."
 	}
 	return input[:truncationPoint] + "..."
+}
+
+func main() {
+	Execute()
 }

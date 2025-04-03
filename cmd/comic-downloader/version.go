@@ -1,9 +1,9 @@
-package cmd
+package main
 
 import (
 	"fmt"
 
-	"github.com/NorkzYT/comic-downloader/src/logger"
+	"github.com/NorkzYT/comic-downloader/internal/logger"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/tcnksm/go-latest"
