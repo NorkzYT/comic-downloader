@@ -72,6 +72,7 @@ func (g *Grabber) IdentifySite() (Site, []error) {
 	sites := []Site{
 		&AsuraChromedp{Grabber: g},
 		&ReaperScans{Grabber: g},
+		&CypherScans{Grabber: g},
 		&MangamonkChromedp{Grabber: g},
 		&Inmanga{Grabber: g},
 		&Mangadex{Grabber: g},
