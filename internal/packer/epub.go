@@ -1,6 +1,6 @@
 // TODO
 // Currently not working properly as it does not use Webtoon mode as https://github.com/ciromattia/kcc has.
-// This is to cover Manhwa and not only Manga or other comics.
+// This is to cover comics.
 // `go-comic-converter` does not have the Webtoon mode functionality as advised here:
 // https://github.com/celogeek/go-comic-converter/issues/30
 

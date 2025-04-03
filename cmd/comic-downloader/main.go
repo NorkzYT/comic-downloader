@@ -32,12 +32,12 @@ type BrowserlessUser interface {
 
 var rootCmd = &cobra.Command{
 	Use:   "comic-downloader [flags] [url] [ranges]",
-	Short: "Helps you download mangas from websites to CBZ files",
+	Short: "Helps you download comics from supported popular websites",
 	Long: `With comic-downloader you can easily convert/download web based comic files.
 
 You only need to specify the URL of the comic and the chapters you want to download as a range.
 
-Note the URL must be of the index of the manga, not a single chapter.`,
+Note the URL must be of the index of the comic, not a single chapter.`,
 	Example: colorizeHelp(`  comic-downloader https://inmanga.com/ver/manga/Fire-Punch/17748683-8986-4628-934a-e94a47fe5d59
 
 Would ask you if you want to download all chapters of Fire Punch (1-83).
@@ -153,11 +153,11 @@ func run(cmd *cobra.Command, args []string) {
 	wg := sync.WaitGroup{}
 	guard := make(chan struct{}, s.GetMaxConcurrency().Chapters)
 	termWidth := getTerminalWidth()
-	mangaLen, chapterLen := calculateTitleLengths(termWidth)
+	comicLen, chapterLen := calculateTitleLengths(termWidth)
 
 	trackers := make([]*progress.Tracker, len(chapters))
 	for i, chap := range chapters {
-		barTitle := fmt.Sprintf("%s - %s", truncateString(title, mangaLen), truncateString(chap.GetTitle(), chapterLen))
+		barTitle := fmt.Sprintf("%s - %s", truncateString(title, comicLen), truncateString(chap.GetTitle(), chapterLen))
 		tracker := &progress.Tracker{
 			Message:            barTitle + " [Fetching]",
 			Total:              80,
@@ -238,7 +238,7 @@ func run(cmd *cobra.Command, args []string) {
 			}
 			tracker.MarkAsDone()
 			<-guard
-		}(chap, trackers[i], fmt.Sprintf("%s - %s", truncateString(title, mangaLen), truncateString(chap.GetTitle(), chapterLen)))
+		}(chap, trackers[i], fmt.Sprintf("%s - %s", truncateString(title, comicLen), truncateString(chap.GetTitle(), chapterLen)))
 	}
 	wg.Wait()
 
@@ -354,14 +354,14 @@ func getTerminalWidth() int {
 	return width
 }
 
-func calculateTitleLengths(termWidth int) (mangaLen, chapterLen int) {
+func calculateTitleLengths(termWidth int) (comicLen, chapterLen int) {
 	reservedSpace := 35
 	availableSpace := termWidth - reservedSpace
 	if availableSpace > 20 {
-		mangaLen = (availableSpace * 60) / 100
+		comicLen = (availableSpace * 60) / 100
 		chapterLen = (availableSpace * 40) / 100
 	} else {
-		mangaLen = 10
+		comicLen = 10
 		chapterLen = 10
 	}
 	return

@@ -29,7 +29,7 @@ func (a *CypherScans) UsesBrowser() bool {
 	return true
 }
 
-// FetchTitle retrieves the manga title by parsing the HTML content.
+// FetchTitle retrieves the comic title by parsing the HTML content.
 func (c *CypherScans) FetchTitle() (string, error) {
 	logger.Debug("CypherScans.FetchTitle: Fetching title from URL: %s", c.URL)
 	if c.title != "" {

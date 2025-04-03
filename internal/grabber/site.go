@@ -48,7 +48,7 @@ type Site interface {
 	InitFlags(cmd *cobra.Command)
 	// Test tests if the site is the one for the specified url
 	Test() (bool, error)
-	// FetchChapters fetches the chapters for the manga
+	// FetchChapters fetches the chapters for the comic
 	FetchChapters() (Filterables, []error)
 	// FetchChapter fetches the specified chapter
 	FetchChapter(Filterable) (*Chapter, error)
