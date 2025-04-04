@@ -1,0 +1,22 @@
+name: comic-downloader
+services:
+  comic-downloader:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: comic-downloader
+    pull_policy: always
+    restart: unless-stopped
+    env_file:
+      - ../../.env
+    ports:
+      - 8454:3000
+    volumes:
+      - ./downloads:/downloads
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    driver: bridge
+    external: true

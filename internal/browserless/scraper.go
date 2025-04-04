@@ -2,6 +2,7 @@ package browserless
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"time"
 
@@ -15,18 +16,35 @@ type BrowserlessUser interface {
 }
 
 func init() {
+	// Load environment variables from .env file.
 	if err := godotenv.Load(); err != nil {
 		logger.Error("browserless: No .env file found or error loading .env: %v", err)
 	}
 }
 
 // NewRemoteContext creates a new chromedp context by connecting to a remote Browserless instance.
+// It requires that BROWSERLESS_TOKEN is set in your .env file.
+// When DOCKER is set to "true", it connects to the docker container endpoint;
+// otherwise, it connects to the host specified by BROWSERLESS_HOST_IP (default "localhost").
+// This makes it flexible to work with hosts on different machines.
 func NewRemoteContext(devtoolsWsURL string, timeout time.Duration) (context.Context, context.CancelFunc, error) {
+	// If no URL is provided, build one from the environment.
 	if devtoolsWsURL == "" {
-		if envURL := os.Getenv("BROWSERLESS_URL"); envURL != "" {
-			devtoolsWsURL = envURL
+		token := os.Getenv("BROWSERLESS_TOKEN")
+		if token == "" {
+			logger.Error("BROWSERLESS_TOKEN must be set in .env")
+			return nil, nil, fmt.Errorf("BROWSERLESS_TOKEN must be set in .env")
+		}
+		if os.Getenv("DOCKER") == "true" {
+			// Use Docker container endpoint.
+			devtoolsWsURL = fmt.Sprintf("ws://comic-downloader-browserless:3000?token=%s", token)
 		} else {
-			devtoolsWsURL = "ws://localhost:8454?token=6R0W53R135510"
+			// Retrieve host IP from environment variable, default to "localhost".
+			host := os.Getenv("BROWSERLESS_HOST_IP")
+			if host == "" {
+				host = "localhost"
+			}
+			devtoolsWsURL = fmt.Sprintf("ws://%s:8454?token=%s", host, token)
 		}
 	}
 	parentCtx, cancelParent := context.WithTimeout(context.Background(), timeout)

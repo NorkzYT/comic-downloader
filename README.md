@@ -60,22 +60,14 @@
 <details>
 <summary><strong>Expand Supported Websites</strong></summary>
 
-Currently, the following sites are supported:
+Currently, comic-downloader supports the following websites:
 
 - [Asura Scans](https://asuracomic.net)
-- [ChapManganato](https://chapmanganato.to)
+- [CypherScans](https://cypheroscans.xyz)
 - [InManga](https://inmanga.com)
-- [LHTranslation](https://lhtranslation.net)
-- [LSComic](https://lscomic.com)
-- [Manga Monks](https://mangamonks.com)
-- [Mangabat](https://mangabat.com)
-- [Mangadex](https://mangadex.org)
-- [Mangakakalot](https://mangakakalot.com) / [.tv](https://mangakakalot.tv)
-- [Manganato](https://manganato.com)
-- [Manganelo](https://manganelo.com) / [.tv](https://manganelo.tv)
-- [Mangapanda](https://mangapanda.in)
-- [ReadMangabat](https://readmangabat.com)
-- [TCBScans](https://tcbscans.com) / [.net](https://www.tcbscans.net) / [.org](https://www.tcbscans.org)
+- [MangaDex](https://mangadex.org)
+- [MangaMonk](https://mangamonk.com)
+- [ReaperScans](https://reaperscans.com)
 
 If a site you use isn't listed, please [open an issue](https://github.com/NorkzYT/comic-downloader/issues) or contribute directly via pull request.
 
@@ -93,6 +85,12 @@ If a site you use isn't listed, please [open an issue](https://github.com/NorkzY
 
 ```bash
 sudo mv comic-downloader /usr/local/bin/
+```
+
+Or create Symbolic Link. This way, if you rebuild the binary, the link will still point to the updated file.
+
+```bash
+sudo ln -s comic-downloader /usr/local/bin/comic-downloader
 ```
 
 #### macOS Users
@@ -116,13 +114,54 @@ comic-downloader [URL] [range]
 
 ### 🐳 Docker
 
-Run using Docker:
+#### Browserless Container
+
+Before running comic-downloader in Docker, start your Browserless container using:
 
 ```bash
-docker run --rm -it -v "/opt/comic-downloader:/downloads" NorkzYT/comic-downloader --help
+docker compose -f docker/containers/browserless/docker-compose.yml up -d --force-recreate
+```
+
+#### comic-downloader Container
+
+Then, run comic-downloader via Docker Compose with:
+
+```bash
+docker compose -f docker/containers/comic-downloader/docker-compose.yml up -d --force-recreate
 ```
 
 > **Note:** Downloads will be saved in your current working directory.
+
+---
+
+## 🔧 Environment Setup
+
+Before running comic-downloader, you **must** set up your Browserless configuration in a `.env` file located in the project root. At a minimum, include the following variables:
+
+```dotenv
+# Your Browserless Host IP (required)
+BROWSERLESS_HOST_IP='xxx.xxx.xxx.xx'
+
+# Your Browserless API token (required)
+BROWSERLESS_TOKEN=your_token_here
+
+# (Optional) Set to "true" if running comic-downloader in a Docker environment.
+DOCKER=false
+```
+
+If you're running locally, the application will connect to:
+
+```
+ws://${BROWSERLESS_HOST_IP}:8454?token=${BROWSERLESS_TOKEN}
+```
+
+If you're running under Docker (i.e. `DOCKER=true`), it will connect to:
+
+```
+ws://comic-downloader-browserless:3000?token=${BROWSERLESS_TOKEN}
+```
+
+> **Note:** Make sure your `.env` file is correctly configured; otherwise, comic-downloader will not be able to establish a connection with Browserless.
 
 ---
 

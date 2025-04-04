@@ -38,31 +38,32 @@ var rootCmd = &cobra.Command{
 You only need to specify the URL of the comic and the chapters you want to download as a range.
 
 Note the URL must be of the index of the comic, not a single chapter.`,
-	Example: colorizeHelp(`  comic-downloader https://inmanga.com/ver/manga/Fire-Punch/17748683-8986-4628-934a-e94a47fe5d59
+	Example: colorizeHelp(`  
+  comic-downloader https://asuracomic.net/series/player-who-returned-10000-years-later-44b620ed 1-2
+    -> Downloads chapters 1–2 from AsuraScans (asuracomic.net).
 
-Would ask you if you want to download all chapters of Fire Punch (1-83).
+  comic-downloader https://cypheroscans.xyz/manga/magic-emperor/ 1-2
+    -> Downloads chapters 1–2 from CypherScans (cypheroscans.xyz).
 
-  comic-downloader https://inmanga.com/ver/manga/Dr-Stone/d9e47ba6-7dfc-401d-a21c-19326c2ea45f 1-10
+  comic-downloader https://inmanga.com/ver/manga/Kaiju-No-8/646317fc-f37c-4686-b568-df8efc60285d 1-2
+    -> Downloads chapters 1–2 from Inmanga (inmanga.com).
 
-Would download chapters 1 to 10 of Dr. Stone from inmanga.com.
+  comic-downloader --language en --bundle https://mangadex.org/title/a1c7c817-4e59-43b7-9365-09675a149a6f/one-piece 1-2
+    -> Downloads and bundles chapters 1–2 from MangaDex (mangadex.org) in English.
 
-  comic-downloader https://inmanga.com/ver/manga/Dr-Stone/d9e47ba6-7dfc-401d-a21c-19326c2ea45f 1-10,12,15-20
+  comic-downloader https://mangamonk.com/infinite-mage 1-2
+    -> Downloads chapters 1–2 from MangaMonk (mangamonk.com).
 
-Would download chapters 1 to 10, 12 and 15 to 20 of Dr. Stone from inmanga.com.
+  comic-downloader https://reaperscans.com/series/the-100th-regression-of-the-max-level-player 1-2
+    -> Downloads chapters 1–2 from ReaperScans (reaperscans.com).
 
-  comic-downloader --language es https://mangadex.org/title/e7eabe96-aa17-476f-b431-2497d5e9d060/black-clover 10-20
-
-Would download chapters 10 to 20 of Black Clover from mangadex.org in Spanish.
-
-  comic-downloader --language es --bundle https://mangadex.org/title/e7eabe96-aa17-476f-b431-2497d5e9d060/black-clover 10-20
-
-It would also download chapters 10 to 20 of Black Clover from mangadex.org in Spanish, although in this case would bundle them into a single file.
-
-Note arguments aren't positional, thus you can specify them in any order:
-
-comic-downloader --language es 10-20 https://mangadex.org/title/e7eabe96-aa17-476f-b431-2497d5e9d060/black-clover --bundle
-
-Would download and bundle chapters 10 to 20 of Black Clover from mangadex.org in Spanish.`),
+  comic-downloader --language en --bundle --format zip https://mangadex.org/title/a1c7c817-4e59-43b7-9365-09675a149a6f/one-piece 1-2
+    -> Downloads, bundles, and archives the chapters in ZIP format.
+  
+Note: Arguments are not positional; you may specify them in any order:
+  comic-downloader --language en 1-2 https://mangamonk.com/infinite-mage --bundle --format raw
+    -> Downloads and exports chapters using a raw folder structure.
+	`),
 	Args: cobra.MinimumNArgs(1),
 	Run:  run,
 }
@@ -242,8 +243,10 @@ func run(cmd *cobra.Command, args []string) {
 	}
 	wg.Wait()
 
+	// If not bundling, stop progress writer, log and print the completion message, then exit.
 	if !settings.Bundle {
 		pw.Stop()
+		logger.Info("Download(s) completed.")
 		os.Exit(0)
 	}
 
@@ -271,6 +274,8 @@ func run(cmd *cobra.Command, args []string) {
 	bundleTracker.MarkAsDone()
 	fmt.Printf("- %s %s\n", color.GreenString("saved file"), color.HiBlackString(filename))
 	pw.Stop()
+	// Log and print download completion message after bundling
+	logger.Info("Download(s) completed.")
 }
 
 func Execute() {

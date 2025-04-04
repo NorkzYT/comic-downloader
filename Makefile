@@ -18,7 +18,7 @@ BUILD_DIR := build
 BINARY_NAME := comic-downloader
 BINARY_WIN := $(BINARY_NAME).exe
 CMD_DIR := ./cmd/comic-downloader
-OUTPUT_DIR := ./output
+OUTPUT_DIR := ./downloads
 
 clean:
 	@echo "Cleaning build artifacts..."

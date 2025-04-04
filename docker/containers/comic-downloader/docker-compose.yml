@@ -1,0 +1,20 @@
+name: comic-downloader
+services:
+  comic-downloader:
+    image: NorkzYT/comic-downloader:latest
+    container_name: comic-downloader
+    pull_policy: always
+    restart: unless-stopped
+    env_file:
+      - ../../.env
+    ports:
+      - 8454:3000
+    volumes:
+      - /opt/appdata/comic-downloader/downloads:/downloads
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    driver: bridge
+    external: true
