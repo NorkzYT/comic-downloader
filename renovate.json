@@ -1,27 +1,54 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["config:base", ":dependencyDashboard", ":rebaseStalePrs"],
+	"extends": [
+		"config:recommended",
+		":dependencyDashboard",
+		":rebaseStalePrs"
+	],
 	"timezone": "America/New_York",
-	"schedule": ["after 10pm and before 5am every weekday", "every weekend"],
-	"labels": ["dependencies", "renovate"],
-	"baseBranches": ["staging"],
+	"schedule": [
+		"after 10pm every weekday",
+		"every weekend",
+		"before 5am every weekday"
+	],
+	"labels": [
+		"dependencies",
+		"renovate"
+	],
+	"baseBranches": [
+		"staging"
+	],
 	"packageRules": [
 		{
-			"matchDatasources": ["docker"],
+			"matchDatasources": [
+				"docker"
+			],
 			"automerge": true,
 			"autoApprove": true,
 			"automergeType": "branch"
 		},
 		{
-			"matchDepTypes": ["devDependencies"],
-			"matchPackagePatterns": ["lint", "prettier"],
+			"matchDepTypes": [
+				"devDependencies"
+			],
 			"automerge": true,
-			"automergeType": "branch"
+			"automergeType": "branch",
+			"matchPackageNames": [
+				"/lint/",
+				"/prettier/"
+			]
 		},
 		{
-			"matchUpdateTypes": ["minor", "patch"],
+			"matchUpdateTypes": [
+				"minor",
+				"patch"
+			],
 			"matchCurrentVersion": "!/^0/",
-			"labels": ["minor", "dependencies", "renovate"],
+			"labels": [
+				"minor",
+				"dependencies",
+				"renovate"
+			],
 			"internalChecksFilter": "strict",
 			"minimumReleaseAge": "3 days",
 			"automerge": true,
