@@ -1,0 +1,556 @@
+# The configurations that used for the recording, feel free to edit them
+# Command to create gif:
+# xvfb-run terminalizer render demos/code/bundle --output demos/bundle.gif
+config:
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: bash -l
+
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /opt/repos/comic-downloader/demos/code
+
+  # Export additional ENV variables
+  env:
+    recording: true
+
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 100
+
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 15
+
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+
+  # Quality
+  # 1 - 100
+  quality: 100
+
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: comic-downloader
+    style:
+      border: 0px black solid
+      # boxShadow: none
+      # margin: 0px
+
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Monaco, Lucida Console, Ubuntu Mono, Monospace"
+
+  # The size of the font
+  fontSize: 14
+
+  # The height of lines
+  lineHeight: 1
+
+  # The spacing between letters
+  letterSpacing: 0
+
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+
+# Records, feel free to edit them
+records:
+  - delay: 1
+    content: "PS1='' ; clear\e[2K\r"
+  - delay: 4
+    content: "\e[1;31m❯\e[1;33m❯\e[1;34m❯\e[0m "
+  - delay: 40
+    content: c
+  - delay: 13
+    content: o
+  - delay: 14
+    content: m
+  - delay: 15
+    content: i
+  - delay: 11
+    content: c
+  - delay: 39
+    content: "-"
+  - delay: 32
+    content: d
+  - delay: 18
+    content: o
+  - delay: 17
+    content: w
+  - delay: 15
+    content: "n"
+  - delay: 19
+    content: l
+  - delay: 14
+    content: o
+  - delay: 7
+    content: a
+  - delay: 14
+    content: d
+  - delay: 17
+    content: e
+  - delay: 17
+    content: r
+  - delay: 21
+    content: " "
+  - delay: 80
+    content: "https://cypheroscans.xyz/manga/magic-emperor"
+  - delay: 71
+    content: " "
+  - delay: 358
+    content: "1"
+  - delay: 62
+    content: "-"
+  - delay: 22
+    content: "2"
+  - delay: 23
+    content: " "
+  - delay: 27
+    content: "-"
+  - delay: 14
+    content: "-"
+  - delay: 22
+    content: o
+  - delay: 21
+    content: u
+  - delay: 10
+    content: t
+  - delay: 28
+    content: p
+  - delay: 24
+    content: u
+  - delay: 11
+    content: t
+  - delay: 75
+    content: "-"
+  - delay: 33
+    content: d
+  - delay: 18
+    content: i
+  - delay: 13
+    content: r
+  - delay: 30
+    content: " "
+  - delay: 50
+    content: .
+  - delay: 15
+    content: /
+  - delay: 17
+    content: d
+  - delay: 14
+    content: o
+  - delay: 11
+    content: w
+  - delay: 13
+    content: "n"
+  - delay: 19
+    content: l
+  - delay: 15
+    content: o
+  - delay: 6
+    content: a
+  - delay: 19
+    content: d
+  - delay: 15
+    content: s
+  - delay: 107
+    content: " "
+  - delay: 10
+    content: "-"
+  - delay: 12
+    content: "-"
+  - delay: 8
+    content: "b"
+  - delay: 13
+    content: "u"
+  - delay: 9
+    content: "n"
+  - delay: 18
+    content: "d"
+  - delay: 10
+    content: "l"
+  - delay: 12
+    content: "e"
+  - delay: 12
+    content: "\r\n\e[?2004l\r"
+  - delay: 1520
+    content: "Initializing remote browser; please wait...\r"
+  - delay: 2548
+    content: "\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m100.452ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m100.499ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m0s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m200.871ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m200.924ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m0s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 102
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m300.845ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m301.052ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m0s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 98
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m400.859ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m400.911ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m0s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m501.294ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m501.339ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m1s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m600.662ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m600.702ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m1s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m700.829ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m700.881ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m1s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m801.219ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m801.281ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m1s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m901.075ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m901.139ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m1s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.000788s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.000834s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m1s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.100871s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.100941s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m1s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.201176s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.201227s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m1s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.300809s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.300874s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m1s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.401033s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.401071s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m1s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.50064s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.500679s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m2s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.600949s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.600999s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m2s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.700623s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.70068s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m2s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.800594s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.800639s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m2s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.900698s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m1.900789s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m2s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.000511s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.000594s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m2s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.101183s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.101236s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m2s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.200477s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.200523s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m2s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.300896s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.300963s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m2s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.401423s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.40147s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m2s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.50137s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.501435s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m3s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.600785s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.600831s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m3s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.700721s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.701188s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m3s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.800352s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.800398s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m3s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.900807s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m2.900846s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m3s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.000797s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.000837s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m3s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.100851s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.100894s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m3s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.200948s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.200995s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m3s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.300872s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.300911s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m3s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.400994s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.401032s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m3s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.500797s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.500838s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m4s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.601295s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.601335s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m4s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.700568s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.700608s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m4s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.80079s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.800832s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m4s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.901361s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m3.901402s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m4s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.000681s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.000764s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m4s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.101306s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.101354s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m4s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.200363s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.200406s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m4s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.300988s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.30103s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m4s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.40065s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.400692s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m4s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.500661s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.500709s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m5s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.601148s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.601191s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m5s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.700566s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.700641s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m5s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.800682s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.800728s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m5s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.900377s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m4.900621s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m5s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.000696s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.000739s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m5s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.101073s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.101163s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m5s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.200469s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.200515s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m5s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.300824s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.300868s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m5s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.400649s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.400689s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m5s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.500994s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.501032s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m6s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.600996s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.601038s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m6s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.701165s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.701211s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m6s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.800796s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.800836s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m6s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.900665s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m5.900731s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m6s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.000421s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.000514s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m6s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.100806s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.100873s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m6s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.200708s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.200773s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m6s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.300999s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.301043s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m6s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.400787s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.400829s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m6s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.500747s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.500787s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m7s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.600894s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.600936s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m7s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.700436s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.700479s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m7s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.800508s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.800552s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m7s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.901048s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m6.901087s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m7s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.001257s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.001297s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m7s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.101101s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.101162s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m7s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.200721s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.200766s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m7s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.301153s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.301195s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m7s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.400598s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.400643s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m7s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.500672s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.500718s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m8s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.600764s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.600804s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m8s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.700788s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.700829s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m8s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.800498s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.800539s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m8s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.901182s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m7.901222s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m8s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.000454s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.000511s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m8s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.100971s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.101013s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m8s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.200497s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.200694s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m8s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.300911s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.300953s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m8s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.40093s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.400975s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m8s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.500696s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.500739s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m9s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.600419s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.600458s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m9s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.700664s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.700708s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m9s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.800954s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.800995s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m9s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.900456s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m8.900504s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m9s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.001013s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.001054s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m9s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.100589s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.100635s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m9s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.200979s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.201023s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m9s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.300372s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.300414s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m9s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.400409s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.400455s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m9s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.501286s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.501326s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m10s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.600886s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.600923s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m10s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.700963s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.701003s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m10s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.801391s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.801431s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m10s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.900711s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m9.900754s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m10s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.000852s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.000891s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m10s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.101135s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.101184s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m10s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.201371s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.201411s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m10s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.300605s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.300644s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m10s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.400841s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.400884s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m10s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.501098s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.50115s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m11s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.601085s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.601148s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m11s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.701353s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.701399s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m11s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.800611s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.80065s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m11s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.900879s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m10.900919s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m11s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.001131s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.001178s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m11s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.10135s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.10139s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m11s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.200613s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.200652s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m11s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.300868s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.300908s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m11s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.401137s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.401178s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m11s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.50134s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.501387s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m12s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.600559s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.600598s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m12s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.700799s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.700844s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m12s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.801057s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.801099s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m12s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.901304s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m11.901342s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m12s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.000566s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.000605s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m12s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.100788s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.100827s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m12s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.20105s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.201094s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m12s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.301302s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.301343s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m12s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.400522s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.400561s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m12s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.500762s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.500801s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m13s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.601004s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.601044s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m13s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.701285s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.701323s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m13s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.800464s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.800507s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m13s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.900712s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m12.900751s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m13s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.000982s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.001021s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m13s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.101243s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.101282s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m13s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.200412s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.200451s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m13s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.300647s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.300686s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m13s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.400893s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.400934s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m13s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.501008s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.501049s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m14s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.601391s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.601437s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m14s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.700485s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.70053s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Fetching]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m14s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.801013s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.801052s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 2 [Downloading]\e[0m\r\n\e[33m║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m14s\e[0m\e[90m; ~ETA: \e[32m0s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[A\e[K\e[37mMagic Emperor - Chapter 2 [Downloading]\e[0m\e[37m ... \e[0m\e[37mdone!\e[0m\e[90m [\e[36m7\e[0m\e[90m in \e[32m13.852s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m13.901226s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m14s\e[0m\e[90m; ~ETA: \e[32m14s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m14.001349s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m14s\e[0m\e[90m; ~ETA: \e[32m14s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m14.100641s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m14s\e[0m\e[90m; ~ETA: \e[32m14s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m14.200775s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m14s\e[0m\e[90m; ~ETA: \e[32m14s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m14.301027s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m14s\e[0m\e[90m; ~ETA: \e[32m14s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m14.400954s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m14s\e[0m\e[90m; ~ETA: \e[32m14s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m14.501347s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m15s\e[0m\e[90m; ~ETA: \e[32m15s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m14.600748s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m15s\e[0m\e[90m; ~ETA: \e[32m15s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m14.70103s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m15s\e[0m\e[90m; ~ETA: \e[32m15s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m14.801269s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m15s\e[0m\e[90m; ~ETA: \e[32m15s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m14.90122s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m15s\e[0m\e[90m; ~ETA: \e[32m15s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m15.000714s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m15s\e[0m\e[90m; ~ETA: \e[32m15s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m15.100633s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Fetching]\e[0m\r\n\e[33m║███████████████░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m15s\e[0m\e[90m; ~ETA: \e[32m15s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[91m 7.45%\e[0m\e[33m \e[33m║█░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m7\e[0m\e[90m in \e[32m15.201222s\e[0m\e[90m; ~ETA: \e[32m3m22s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mMagic Emperor - Chapter 1 [Downloading]\e[0m\r\n\e[33m║████████████████░░░░░░░░░░░░░░║\e[0m\e[90m [\e[32m15s\e[0m\e[90m; ~ETA: \e[32m3m22s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[37mMagic Emperor - Chapter 1 [Downloading]\e[0m\e[37m ... \e[0m\e[37mdone!\e[0m\e[90m [\e[36m14\e[0m\e[90m in \e[32m15.27s\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\r\n\e[91m 0.00%\e[0m\e[33m \e[33m║░░░░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m0\e[0m\e[90m in \e[32m30.327ms\e[0m\e[90m; \e[35m0\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mBundle [Archiving All Chapters]\e[0m\r\n\e[33m║████████████████████░░░░░░░░░░║\e[0m\e[90m [\e[32m15s\e[0m\e[90m; ~ETA: \e[32m8s\e[0m\e[90m]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[91m19.05%\e[0m\e[33m \e[33m║███░░░░░░░░░░░░░░░║\e[0m\e[90m [\e[36m4\e[0m\e[90m in \e[32m130.676ms\e[0m\e[90m; \e[35m30\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mBundle [Archiving All Chapters]\e[0m\r\n\e[33m║█████████████████████▓░░░░░░░░║\e[0m\e[90m [\e[32m15s\e[0m\e[90m; ~ETA: \e[32m6s\e[0m\e[90m; \e[35m30\e[0m\e[90m/s]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[91m38.10%\e[0m\e[33m \e[33m║██████▓░░░░░░░░░░░║\e[0m\e[90m [\e[36m8\e[0m\e[90m in \e[32m229.973ms\e[0m\e[90m; \e[35m34\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mBundle [Archiving All Chapters]\e[0m\r\n\e[33m║███████████████████████▓░░░░░░║\e[0m\e[90m [\e[32m16s\e[0m\e[90m; ~ETA: \e[32m4s\e[0m\e[90m; \e[35m34\e[0m\e[90m/s]\e[0m\r\n"
+  - delay: 100
+    content: "\e[A\e[K\e[A\e[K\e[91m57.14%\e[0m\e[33m \e[33m║██████████░░░░░░░░║\e[0m\e[90m [\e[36m12\e[0m\e[90m in \e[32m330.271ms\e[0m\e[90m; \e[35m36\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mBundle [Archiving All Chapters]\e[0m\r\n\e[33m║█████████████████████████▒░░░░║\e[0m\e[90m [\e[32m16s\e[0m\e[90m; ~ETA: \e[32m3s\e[0m\e[90m; \e[35m36\e[0m\e[90m/s]\e[0m\r\n"
+  - delay: 101
+    content: "\e[A\e[K\e[A\e[K\e[91m71.43%\e[0m\e[33m \e[33m║████████████▓░░░░░║\e[0m\e[90m [\e[36m15\e[0m\e[90m in \e[32m430.52ms\e[0m\e[90m; \e[35m34\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mBundle [Archiving All Chapters]\e[0m\r\n\e[33m║███████████████████████████░░░║\e[0m\e[90m [\e[32m16s\e[0m\e[90m; ~ETA: \e[32m2s\e[0m\e[90m; \e[35m34\e[0m\e[90m/s]\e[0m\r\n"
+  - delay: 99
+    content: "\e[A\e[K\e[A\e[K\e[91m85.71%\e[0m\e[33m \e[33m║███████████████░░░║\e[0m\e[90m [\e[36m18\e[0m\e[90m in \e[32m530.75ms\e[0m\e[90m; \e[35m33\e[0m\e[90m/s]\e[0m\e[37m ... \e[0m\e[37mBundle [Archiving All Chapters]\e[0m\r\n\e[33m║████████████████████████████▒░║\e[0m\e[90m [\e[32m16s\e[0m\e[90m; ~ETA: \e[32m1s\e[0m\e[90m; \e[35m33\e[0m\e[90m/s]\e[0m\r\n"
+  - delay: 66
+    content: "- \e[32msaved file\e[0m \e[90mdownloads/Magic Emperor Chapters 1-2 - bundle.cbz\e[0m\r\n\e[A\e[K\e[A\e[K\e[37mBundle [Archiving All Chapters]\e[0m\e[37m ... \e[0m\e[37mdone!\e[0m\e[90m [\e[36m21\e[0m\e[90m in \e[32m597ms\e[0m\e[90m;\r\n"
+  - delay: 298
+    content: "\e[1;31m❯\e[1;33m❯\e[1;34m❯\e[0m [INFO] Download(s) completed."
+  - delay: 10988
+    content: " "

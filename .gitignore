@@ -1,6 +1,5 @@
 build
 output
-demos/*.yml
 node_modules
 .env
 bin

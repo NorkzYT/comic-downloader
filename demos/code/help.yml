@@ -1,0 +1,168 @@
+# The configurations that used for the recording, feel free to edit them
+# Command to create gif:
+# xvfb-run terminalizer render demos/code/help --output demos/help.gif
+config:
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: bash -l
+
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /opt/repos/comic-downloader
+
+  # Export additional ENV variables
+  env:
+    recording: true
+
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 114
+
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 62
+
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+
+  # Quality
+  # 1 - 100
+  quality: 100
+
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: comic-downloader
+    style:
+      border: 0px black solid
+      # boxShadow: none
+      # margin: 0px
+
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Monaco, Lucida Console, Ubuntu Mono, Monospace"
+
+  # The size of the font
+  fontSize: 10
+
+  # The height of lines
+  lineHeight: 1
+
+  # The spacing between letters
+  letterSpacing: 0
+
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+
+# Records, feel free to edit them
+records:
+  - delay: 1
+    content: "PS1='' ; clear\e[2K\r"
+  - delay: 4
+    content: "\e[1;31m❯\e[1;33m❯\e[1;34m❯\e[0m "
+  - delay: 40
+    content: c
+  - delay: 13
+    content: o
+  - delay: 14
+    content: m
+  - delay: 15
+    content: i
+  - delay: 11
+    content: c
+  - delay: 39
+    content: "-"
+  - delay: 32
+    content: d
+  - delay: 18
+    content: o
+  - delay: 17
+    content: w
+  - delay: 15
+    content: "n"
+  - delay: 19
+    content: l
+  - delay: 14
+    content: o
+  - delay: 7
+    content: a
+  - delay: 14
+    content: d
+  - delay: 17
+    content: e
+  - delay: 17
+    content: r
+  - delay: 151
+    content: " "
+  - delay: 24
+    content: h
+  - delay: 23
+    content: e
+  - delay: 22
+    content: l
+  - delay: 25
+    content: p
+  - delay: 801
+    content: "\r\n\e[?2004l\r"
+  - delay: 68
+    content: "With comic-downloader you can easily convert/download web based comic files.\r\n\r\nYou only need to specify the URL of the comic and the chapters you want to download as a range.\r\n\r\nNote the URL must be of the index of the comic, not a single chapter.\r\n\r\n"
+  - delay: 8
+    content: "\r\n\e[96;1mUsage:\e[0;22m\r\n\r\n  \e[37;1mcomic-downloader\e[0;22m [flags] [url] [ranges]\r\n  \e[37;1mcomic-downloader\e[0;22m [command]\r\n\r\n\r\n\e[96;1mExamples:\e[0;22m\r\n\r\n  \r\n  \e[33mcomic-downloader\e[0m \e[90mhttps://asuracomic.net/series/player-who-returned-10000-years-later-44b620ed\e[0m \e[90m1-2\e[0m\r\n    -> Downloads chapters 1–2 from AsuraScans (asuracomic.net).\r\n\r\n  \e[33mcomic-downloader\e[0m \e[90mhttps://cypheroscans.xyz/manga/magic-emperor/\e[0m \e[90m1-2\e[0m\r\n    -> Downloads chapters 1–2 from CypherScans (cypheroscans.xyz).\r\n\r\n  \e[33mcomic-downloader\e[0m \e[90mhttps://inmanga.com/ver/manga/Kaiju-No-8/646317fc-f37c-4686-b568-df8efc60285d\e[0m \e[90m1-2\e[0m\r\n    -> Downloads chapters 1–2 from Inmanga (inmanga.com).\r\n\r\n  \e[33mcomic-downloader\e[0m \e[94m--language\e[0m en \e[94m--bundle\e[0m \e[90mhttps://mangadex.org/title/a1c7c817-4e59-43b7-9365-09675a149a6f/one-piece\e[0m \e[90m1-2\e[0m\r\n    -> Downloads and bundles chapters 1–2 from MangaDex (mangadex.org) in English.\r\n\r\n  \e[33mcomic-downloader\e[0m \e[90mhttps://mangamonk.com/infinite-mage\e[0m \e[90m1-2\e[0m\r\n    -> Downloads chapters 1–2 from MangaMonk (mangamonk.com).\r\n\r\n  \e[33mcomic-downloader\e[0m \e[90mhttps://reaperscans.com/series/the-100th-regression-of-the-max-level-player\e[0m \e[90m1-2\e[0m\r\n    -> Downloads chapters 1–2 from ReaperScans (reaperscans.com).\r\n\r\n  \e[33mcomic-downloader\e[0m \e[94m--language\e[0m en \e[94m--bundle\e[0m --format zip \e[90mhttps://mangadex.org/title/a1c7c817-4e59-43b7-9365-09675a149a6f/one-piece\e[0m \e[90m1-2\e[0m\r\n    -> Downloads, bundles, and archives the chapters in ZIP format.\r\n  \r\nNote: Arguments are not positional; you may specify them in any order:\r\n  \e[33mcomic-downloader\e[0m \e[94m--language\e[0m en \e[90m1-2\e[0m \e[90mhttps://mangamonk.com/infinite-mage\e[0m \e[94m--bundle\e[0m --format raw\r\n    -> Downloads and exports chapters using a raw folder structure.\r\n\t\r\n\r\n\r\n\e[96;1mAvailable Commands:\e[0;22m\r\n\r\n  \e[93;1mcompletion\e[0;22m Generate the autocompletion script for the specified shell\r\n  \e[93;1mhelp\e[0;22m      Help about any command\r\n  \e[93;1mversion\e[0;22m   Shows the version of the application\r\n\r\n\r\n\e[96;1mFlags:\e[0;22m\r\n\r\n  \e[37;1m-b,\e[0;22m \e[37;1m--bundle\e[0;22m                     \e[95mbundle all specified chapters into a single file\e[0m\r\n  \e[37;1m-c,\e[0;22m \e[37;1m--concurrency\e[0;22m \e[37;3muint8\e[0;23m          \e[95mnumber of concurrent chapter downloads, hard-limited to 5 (default 5)\e[0m\r\n  \e[37;1m-C,\e[0;22m \e[37;1m--concurrency-pages\e[0;22m \e[37;3muint8\e[0;23m    \e[95mnumber of concurrent page downloads, hard-limited to 10 (default 10)\e[0m\r\n  \e[37;1m-t,\e[0;22m \e[37;1m--filename-template\e[0;22m \e[37;3mstring\e[0;23m   \e[95mtemplate for the resulting filename (default \"{{.Series}} {{.Number}} - {{.Title}}\")\e[0m\r\n  \e[37;1m-f,\e[0;22m \e[37;1m--format\e[0;22m \e[37;3mstring\e[0;23m              \e[95marchive format: cbz, zip, raw (default \"cbz\")\e[0m\r\n  \e[37;1m-h,\e[0;22m \e[37;1m--help\e[0;22m                       \e[95mhelp for comic-downloader\e[0m\r\n  \e[37;1m-l,\e[0;22m \e[37;1m--language\e[0;22m \e[37;3mstring\e[0;23m            \e[95monly download the specified language\e[0m\r\n  \e[37;1m-o,\e[0;22m \e[37;1m--output-dir\e[0;22m \e[37;3mstring\e[0;23m          \e[95moutput directory for the downloaded files (default \"./\")\e[0m\r\n\r\n\r\nUse \"\e[37;1mcomic-downloader\e[0;22m [command] --help\" for more information about a command.\r\n\r\n\e[?2004h\e]0;\e[1;31m❯\e[1;33m❯\e[1;34m❯\e[0m "
+  - delay: 55088
+    content: "\e"

@@ -29,8 +29,6 @@
   </a>
 </div>
 
----
-
 ## 📚 Table of Contents
 
 <details>
@@ -53,7 +51,10 @@
 
 </details>
 
----
+<p></p>
+<p align="center">
+  <img src="./demos/prompt.gif" alt="prompt img">
+</p>
 
 ## 🌐 Supported Websites
 
@@ -72,8 +73,6 @@ Currently, comic-downloader supports the following websites:
 If a site you use isn't listed, please [open an issue](https://github.com/NorkzYT/comic-downloader/issues) or contribute directly via pull request.
 
 </details>
-
----
 
 ## 🚀 Installation
 
@@ -132,8 +131,6 @@ docker compose -f docker/containers/comic-downloader/docker-compose.yml up -d --
 
 > **Note:** Downloads will be saved in your current working directory.
 
----
-
 ## 🔧 Environment Setup
 
 Before running comic-downloader, you **must** set up your Browserless configuration in a `.env` file located in the project root. At a minimum, include the following variables:
@@ -163,8 +160,6 @@ ws://comic-downloader-browserless:3000?token=${BROWSERLESS_TOKEN}
 
 > **Note:** Make sure your `.env` file is correctly configured; otherwise, comic-downloader will not be able to establish a connection with Browserless.
 
----
-
 ## 💻 Usage
 
 ### Basic Usage
@@ -174,6 +169,11 @@ Interactive download of all chapters:
 ```bash
 comic-downloader [URL]
 ```
+
+<p></p>
+<p align="">
+  <img src="./demos/download.gif" alt="download img">
+</p>
 
 The URL must be the series' main page.
 
@@ -190,7 +190,7 @@ comic-downloader [URL] 1-50
 Explicitly select a language:
 
 ```bash
-comic-downloader [URL] 1-10 --language es
+comic-downloader [URL] 1-10 --language en
 ```
 
 ### Bundling Chapters
@@ -198,31 +198,35 @@ comic-downloader [URL] 1-10 --language es
 Combine chapters into a single `.cbz` file:
 
 ```bash
-comic-downloader [URL] 1-8 --bundle
+comic-downloader [URL] 1-2 --bundle
 ```
+
+<p></p>
+<p align="">
+  <img src="./demos/bundle.gif" alt="bundle img">
+</p>
 
 ### Help
 
 View all commands and options:
 
 ```bash
-comic-downloader --help
+comic-downloader help
 ```
 
----
+<p></p>
+<p align="">
+  <img src="./demos/help.gif" alt="help img">
+</p>
 
 ## 🛠️ Troubleshooting
 
 - **"Command not recognized":** Verify the binary is in a PATH-accessible location.
 - **macOS unsigned binary error:** Run `sudo spctl --master-disable`.
 
----
-
 ## 🤝 Contribution
 
 Contributions, issues, and pull requests are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
 
 ## 📈 Star History
 
