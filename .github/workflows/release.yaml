@@ -31,7 +31,7 @@ jobs:
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
           goversion: "1.23.0"
-          project_path: "."
+          project_path: "./cmd"
           binary_name: "comic-downloader"
           extra_files: LICENSE README.md
           ldflags: >-
