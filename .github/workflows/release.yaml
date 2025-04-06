@@ -31,9 +31,9 @@ jobs:
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
           goversion: "1.23.0"
-          project_path: "./cmd"
+          project_path: "./cmd/comic-downloader"
           binary_name: "comic-downloader"
           extra_files: LICENSE README.md
           ldflags: >-
-            -X 'github.com/NorkzYT/comic-downloader/cmd.Version=${{ env.sha_short }}'
-            -X 'github.com/NorkzYT/comic-downloader/cmd.Tag=${{ env.tag }}'
+            -X 'github.com/NorkzYT/comic-downloader/cmd/comic-downloader.Version=${{ env.sha_short }}'
+            -X 'github.com/NorkzYT/comic-downloader/cmd/comic-downloader.Tag=${{ env.tag }}'
