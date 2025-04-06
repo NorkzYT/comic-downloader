@@ -18,7 +18,7 @@ type BrowserlessUser interface {
 func init() {
 	// Load environment variables from .env file.
 	if err := godotenv.Load(); err != nil {
-		logger.Error("browserless: No .env file found or error loading .env: %v", err)
+		logger.Info("No .env file found, continuing with environment variables")
 	}
 }
 

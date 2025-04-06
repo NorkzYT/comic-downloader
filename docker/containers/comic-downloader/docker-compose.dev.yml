@@ -2,15 +2,18 @@ name: comic-downloader
 services:
   comic-downloader:
     build:
-      context: ..
+      context: ../../..
       dockerfile: Dockerfile
     container_name: comic-downloader
     pull_policy: always
     restart: unless-stopped
     env_file:
-      - ../../.env
-    ports:
-      - 8454:3000
+      - ./.env
+    environment:
+      - BROWSERLESS_HOST_IP=${BROWSERLESS_HOST_IP:?error}
+      - BROWSERLESS_TOKEN=${BROWSERLESS_TOKEN:?error}
+      - DOCKER=${DOCKER:?error}
+      - DEBUG=${DEBUG}
     volumes:
       - ./downloads:/downloads
     networks:

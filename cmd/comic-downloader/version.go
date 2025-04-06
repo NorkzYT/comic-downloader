@@ -10,10 +10,10 @@ import (
 )
 
 var (
-	// Tag is the git tag of the current build.
-	Tag = "develop"
-	// Version is the version of the current build.
-	Version = "develop"
+	// The git tag of the current build.
+	Tag = "production"
+	// The version of the current build.
+	Version = "production"
 )
 
 var versionCmd = &cobra.Command{

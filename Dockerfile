@@ -1,28 +1,35 @@
-# Build from a golang based image
-FROM golang:latest as builder
+# Build stage: compile the binary using a golang image.
+FROM golang:latest AS builder
 
 LABEL maintainer="Richard Lora <richard@pcscorp.dev>"
 
 WORKDIR /app
 
+# Copy go.mod/go.sum and download modules.
 COPY go.mod go.sum ./
 RUN go mod download
-COPY . .
 
+# Copy the source and build the binary.
+COPY . .
 RUN make build/unix
 
-# Start a new stage from scratch
+# Runtime stage: use a minimal Alpine image.
 FROM alpine:latest
 
 WORKDIR /app
 
+# Create the downloads directory.
 RUN mkdir /downloads
 
-# Copy the pre-built binary file from the previous stage
-COPY --from=builder /app/comic-downloader /usr/bin/comic-downloader
+# Copy the built binary from the builder stage, renaming it to _comic-downloader.
+COPY --from=builder /app/build/comic-downloader /usr/bin/_comic-downloader
 
-COPY /docker/entrypoint.sh /usr/bin/entrypoint.sh
-RUN chmod +x /usr/bin/entrypoint.sh
+# Copy the wrapper script into the image as /usr/bin/comic-downloader.
+COPY docker/containers/comic-downloader/entrypoint-wrapper.sh /usr/bin/comic-downloader
+RUN chmod +x /usr/bin/comic-downloader
 
-# Set comic-downloader as the entrypoint
-ENTRYPOINT ["/usr/bin/entrypoint.sh", "-o", "/downloads"]
+# Set the wrapper as the container's entrypoint.
+ENTRYPOINT ["/usr/bin/comic-downloader"]
+
+# Set CMD to empty so no extra arguments are passed at startup.
+CMD []

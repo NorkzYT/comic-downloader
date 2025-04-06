@@ -15,7 +15,7 @@ var debugEnabled bool
 func init() {
 	// Load environment variables from .env file if available.
 	if err := godotenv.Load(); err != nil {
-		log.Printf("logger: no .env file found or error loading .env: %v", err)
+		log.Printf("logger: no .env file found or error loading .env: %v—continuing with environment variables", err)
 	}
 
 	// Check if DEBUG environment variable is set to "true" (case-insensitive) or "1"

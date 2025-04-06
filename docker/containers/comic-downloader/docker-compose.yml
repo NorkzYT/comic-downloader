@@ -1,14 +1,12 @@
 name: comic-downloader
 services:
   comic-downloader:
-    image: NorkzYT/comic-downloader:latest
+    image: NorkzYT/comic-downloader:v1.0.0
     container_name: comic-downloader
     pull_policy: always
     restart: unless-stopped
     env_file:
-      - ../../.env
-    ports:
-      - 8454:3000
+      - ./.env
     volumes:
       - /opt/appdata/comic-downloader/downloads:/downloads
     networks:
