@@ -6,9 +6,10 @@ toolchain go1.23.7
 
 require (
 	github.com/PuerkitoBio/goquery v1.10.2
-	github.com/chromedp/chromedp v0.13.3
+	github.com/chromedp/chromedp v0.13.6
 	github.com/fatih/color v1.18.0
 	github.com/ivanpirog/coloredcobra v1.0.1
+	github.com/joho/godotenv v1.5.1
 	github.com/manifoldco/promptui v0.9.0
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/pflag v1.0.6
@@ -17,10 +18,7 @@ require (
 	golang.org/x/term v0.30.0
 )
 
-require (
-	github.com/joho/godotenv v1.5.1 // indirect
-	golang.org/x/text v0.22.0 // indirect
-)
+require golang.org/x/text v0.22.0 // indirect
 
 require (
 	github.com/VividCortex/ewma v1.2.0 // indirect
@@ -28,7 +26,7 @@ require (
 	github.com/andybalholm/cascadia v1.3.3 // indirect
 	github.com/beevik/etree v1.5.0 // indirect
 	github.com/celogeek/go-comic-converter/v3 v3.0.2 // indirect
-	github.com/chromedp/cdproto v0.0.0-20250319231242-a755498943c8 // indirect
+	github.com/chromedp/cdproto v0.0.0-20250403032234-65de8f5d025b // indirect
 	github.com/chromedp/sysutil v1.1.0 // indirect
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
 	github.com/disintegration/gift v1.2.1 // indirect
