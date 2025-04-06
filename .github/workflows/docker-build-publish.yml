@@ -9,7 +9,7 @@ on:
     paths:
       - "docker/**"
       - ".github/workflows/docker-build-publish.yml"
-      - "dockerfile"
+      - "Dockerfile"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
