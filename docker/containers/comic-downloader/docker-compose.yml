@@ -1,7 +1,7 @@
 name: comic-downloader
 services:
   comic-downloader:
-    image: NorkzYT/comic-downloader:v1.0.0
+    image: NorkzYT/comic-downloader:1.0.0
     container_name: comic-downloader
     pull_policy: always
     restart: unless-stopped
