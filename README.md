@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="docs/content/assets/img/comic-downloader-cover-rl.png" width="490" alt="Comic Downloader">
+    <img src="https://raw.githubusercontent.com/NorkzYT/comic-downloader/refs/heads/main/docs/content/assets/img/comic-downloader-cover-rl.png" width="490" alt="Comic Downloader">
 </p>
 
 <p align="center">
@@ -53,7 +53,7 @@
 
 <p></p>
 <p align="center">
-  <img src="./demos/prompt.gif" alt="prompt img">
+  <img src="https://raw.githubusercontent.com/NorkzYT/comic-downloader/refs/heads/main/demos/prompt.gif" alt="prompt img">
 </p>
 
 ## 🌐 Supported Websites
@@ -172,7 +172,7 @@ comic-downloader [URL]
 
 <p></p>
 <p align="">
-  <img src="./demos/download.gif" alt="download img">
+  <img src="https://raw.githubusercontent.com/NorkzYT/comic-downloader/refs/heads/main/demos/download.gif?raw=true" alt="download img">
 </p>
 
 The URL must be the series' main page.
@@ -203,7 +203,7 @@ comic-downloader [URL] 1-2 --bundle
 
 <p></p>
 <p align="">
-  <img src="./demos/bundle.gif" alt="bundle img">
+  <img src="https://raw.githubusercontent.com/NorkzYT/comic-downloader/refs/heads/main/demos/bundle.gif?raw=true" alt="bundle img">
 </p>
 
 ### Help
@@ -216,7 +216,7 @@ comic-downloader help
 
 <p></p>
 <p align="">
-  <img src="./demos/help.gif" alt="help img">
+  <img src="https://raw.githubusercontent.com/NorkzYT/comic-downloader/refs/heads/main/demos/help.gif?raw=true" alt="help img">
 </p>
 
 ## 🛠️ Troubleshooting

@@ -84,6 +84,10 @@ func run(cmd *cobra.Command, args []string) {
 	}
 	s.InitFlags(cmd)
 
+	if _, isToongod := s.(*grabber.Toongod); isToongod {
+		settings.MaxConcurrency.Chapters = 1
+	}
+
 	if bl, ok := s.(BrowserlessUser); ok && bl.UsesBrowser() {
 		fmt.Println("Initializing remote browser; please wait...")
 	}

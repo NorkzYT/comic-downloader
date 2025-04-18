@@ -73,6 +73,7 @@ func (g *Grabber) IdentifySite() (Site, []error) {
 		&Mangadex{Grabber: g},
 		&Mangamonk{Grabber: g},
 		&ReaperScans{Grabber: g},
+		&Toongod{Grabber: g},
 	}
 	var errs []error
 
