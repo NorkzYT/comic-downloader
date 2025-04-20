@@ -66,10 +66,12 @@ Currently, comic-downloader supports the following websites:
 - [Asura Scans](https://asuracomic.net)
 - [CypherScans](https://cypheroscans.xyz)
 - [InManga](https://inmanga.com)
+- [KappaBeast](https://kappabeast.com)
 - [MangaDex](https://mangadex.org)
 - [MangaMonk](https://mangamonk.com)
 - [ReaperScans](https://reaperscans.com)
 - [Toongod](https://toongod.org)
+- [ToonClash](https://toonclash.com)
 
 If a site you use isn't listed, please [open an issue](https://github.com/NorkzYT/comic-downloader/issues) or contribute directly via pull request.
 
