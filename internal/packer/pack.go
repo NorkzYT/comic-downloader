@@ -32,21 +32,26 @@ func getSiteFormat(s grabber.Site) (string, error) {
 // PackSingle packages a single downloaded chapter using the selected archive format.
 // It uses the filename template from the Site settings.
 func PackSingle(outputDir string, s grabber.Site, chapter *DownloadedChapter, progress func(page, progress int)) (string, error) {
+	// fetch series title
 	title, _ := s.FetchTitle()
-	parts := NewChapterFileTemplateParts(title, chapter.Chapter)
-	filename, err := NewFilenameFromTemplate(s.GetFilenameTemplate(), parts)
-	if err != nil {
-		return "", fmt.Errorf("- error creating filename for chapter %s: %s", title, err.Error())
+
+	// decide filename
+	format, _ := getSiteFormat(s)
+	var filename string
+	if format == "raw" {
+		// raw output: simple chapter-N folder
+		filename = fmt.Sprintf("chapter-%d", int(chapter.Number))
+	} else {
+		parts := NewChapterFileTemplateParts(title, chapter.Chapter)
+		filename, _ = NewFilenameFromTemplate(s.GetFilenameTemplate(), parts)
 	}
-	// Retrieve the desired format from settings.
-	format, err := getSiteFormat(s)
-	if err != nil {
-		return "", err
-	}
+
+	// pick archiver
 	archiver, err := NewArchiver(format)
 	if err != nil {
 		return "", err
 	}
+
 	return pack(outputDir, filename, chapter.Files, progress, archiver)
 }
 

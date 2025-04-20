@@ -19,14 +19,37 @@ import (
 // Toongod is a grabber implementation for www.toongod.org.
 type Toongod struct {
 	*Grabber
-	title      string
-	bypassOnce sync.Once
+	title       string
+	bypassOnce  sync.Once
+	allocOnce   sync.Once
+	allocCtx    context.Context
+	allocCancel context.CancelFunc
 }
 
 // ToongodChapter represents a chapter from the Toongod website.
 type ToongodChapter struct {
 	Chapter
 	URL string
+}
+
+// initAllocator sets up a shared ChromeDP allocator (browser instance) once.
+func (t *Toongod) initAllocator() {
+	t.allocOnce.Do(func() {
+		remoteDebug := os.Getenv("REMOTE_DEBUG_URL")
+		if remoteDebug == "" {
+			remoteDebug = "http://localhost:6082"
+		}
+		allocCtx, allocCancel := chromedp.NewRemoteAllocator(context.Background(), remoteDebug)
+		t.allocCtx = allocCtx
+		t.allocCancel = allocCancel
+	})
+}
+
+// cleanupAllocator should be called at shutdown to close the browser.
+func (t *Toongod) cleanupAllocator() {
+	if t.allocCancel != nil {
+		t.allocCancel()
+	}
 }
 
 // Test checks if the current URL is hosted on "toongod.org".
@@ -46,36 +69,35 @@ func (t *Toongod) FetchTitle() (string, error) {
 		return t.title, nil
 	}
 
-	// 1) Bypass Cloudflare once (share cookies across domain).
+	// 1) Bypass Cloudflare once.
 	var cfErr error
 	t.bypassOnce.Do(func() {
-		cfErr = cloudflare.TriggerCloudflare(t.URL, 5000)
+		cfErr = cloudflare.TriggerCloudflare(t.URL, 1000)
 	})
 	if cfErr != nil {
 		return "", fmt.Errorf("cloudflare bypass failed: %w", cfErr)
 	}
 
-	// 2) Headless extract via existing remote-debug session.
-	remoteDebugURL := os.Getenv("REMOTE_DEBUG_URL")
-	if remoteDebugURL == "" {
-		remoteDebugURL = "http://localhost:6082"
-	}
-	allocCtx, allocCancel := chromedp.NewRemoteAllocator(context.Background(), remoteDebugURL)
-	defer allocCancel()
-	ctx, cancel := chromedp.NewContext(allocCtx)
-	defer cancel()
-	ctx, cancel = context.WithTimeout(ctx, 30*time.Second)
+	// 2) Initialize shared allocator.
+	t.initAllocator()
+
+	// 3) Create a new tab context for this operation.
+	tCtx, tabCancel := chromedp.NewContext(t.allocCtx)
+	defer tabCancel()
+
+	// 4) Add timeout.
+	ctx, cancel := context.WithTimeout(tCtx, 30*time.Second)
 	defer cancel()
 
+	// 5) Extract title via JS.
 	var title string
-	jsTitle := `document.querySelector("div.post-title h1") ? document.querySelector("div.post-title h1").innerText : "";`
-	err := chromedp.Run(ctx,
+	jsTitle := `document.querySelector("div.post-title h1")?.innerText||""`
+	if err := chromedp.Run(ctx,
 		chromedp.Navigate(t.URL),
 		chromedp.WaitVisible("div.post-title h1", chromedp.ByQuery),
 		chromedp.Sleep(500*time.Millisecond),
 		chromedp.Evaluate(jsTitle, &title),
-	)
-	if err != nil {
+	); err != nil {
 		return "", fmt.Errorf("chromedp title extraction failed: %w", err)
 	}
 
@@ -86,51 +108,52 @@ func (t *Toongod) FetchTitle() (string, error) {
 
 // FetchChapters retrieves the list of chapters.
 func (t *Toongod) FetchChapters() (Filterables, []error) {
-	// 1) Ensure Cloudflare bypass done only once.
+	// 1) Bypass Cloudflare once.
 	var cfErr error
 	t.bypassOnce.Do(func() {
-		cfErr = cloudflare.TriggerCloudflare(t.URL, 5000)
+		cfErr = cloudflare.TriggerCloudflare(t.URL, 1000)
 	})
 	if cfErr != nil {
 		return nil, []error{fmt.Errorf("cloudflare bypass failed: %w", cfErr)}
 	}
 
-	// 2) Headless extract
-	remoteDebugURL := os.Getenv("REMOTE_DEBUG_URL")
-	if remoteDebugURL == "" {
-		remoteDebugURL = "http://localhost:6082"
-	}
-	allocCtx, allocCancel := chromedp.NewRemoteAllocator(context.Background(), remoteDebugURL)
-	defer allocCancel()
-	ctx, cancel := chromedp.NewContext(allocCtx)
-	defer cancel()
-	ctx, cancel = context.WithTimeout(ctx, 30*time.Second)
+	// 2) Initialize shared allocator.
+	t.initAllocator()
+
+	// 3) New tab context.
+	tCtx, tabCancel := chromedp.NewContext(t.allocCtx)
+	defer tabCancel()
+
+	// 4) Timeout for this op.
+	ctx, cancel := context.WithTimeout(tCtx, 30*time.Second)
 	defer cancel()
 
+	// 5) Extract chapters via JS.
 	var rawJSON string
 	jsChapters := `(function(){
-	        var chapters = [];
-	        var items = document.querySelectorAll("ul.main.version-chap.no-volumn.active li.wp-manga-chapter");
-	        for(var i = 0; i < items.length; i++){
-	            var link = items[i].querySelector("a");
-	            if(!link) continue;
-	            var titleText = link.textContent.trim();
-	            var num = parseFloat(titleText.replace(/Chapter\s*/i, "")) || 0;
-	            var href = link.href;
-	            chapters.push({title: titleText, number: num, url: href});
-	        }
-	        return JSON.stringify(chapters);
-	    })();`
+        var chapters = [];
+        var items = document.querySelectorAll("ul.main.version-chap.no-volumn.active li.wp-manga-chapter");
+        for(var i = 0; i < items.length; i++){
+            var link = items[i].querySelector("a");
+            if(!link) continue;
+            var titleText = link.textContent.trim();
+            var num = parseFloat(titleText.replace(/Chapter\s*/i, "")) || 0;
+            var href = link.href;
+            chapters.push({title: titleText, number: num, url: href});
+        }
+        return JSON.stringify(chapters);
+    })();`
 
 	if err := chromedp.Run(ctx,
 		chromedp.Navigate(t.URL),
 		chromedp.WaitVisible("ul.main.version-chap.no-volumn.active", chromedp.ByQuery),
-		chromedp.Sleep(2*time.Second),
+		chromedp.Sleep(1*time.Second),
 		chromedp.Evaluate(jsChapters, &rawJSON),
 	); err != nil {
 		return nil, []error{fmt.Errorf("chromedp chapters extraction failed: %w", err)}
 	}
 
+	// 6) Unmarshal and wrap.
 	var list []struct {
 		Title  string  `json:"title"`
 		Number float64 `json:"number"`
@@ -151,72 +174,44 @@ func (t *Toongod) FetchChapters() (Filterables, []error) {
 	return out, nil
 }
 
-// FetchChapter downloads one chapter by retrieving raw image URLs
-// and pushing them into FastAPI's /save_image, then collecting the saved filenames.
+// FetchChapter downloads one chapter by using FastAPI to batch-save images.
 func (t *Toongod) FetchChapter(f Filterable) (*Chapter, error) {
 	tc, ok := f.(*ToongodChapter)
 	if !ok {
 		return nil, fmt.Errorf("invalid chapter type")
 	}
-	logger.Debug("Toongod.FetchChapter: %s", tc.URL)
 
-	// 1) (Bypass already done once; skip per-chapter trigger to avoid loops.)
-
-	// 2) Extract raw image URLs headlessly
-	remoteDebugURL := os.Getenv("REMOTE_DEBUG_URL")
-	if remoteDebugURL == "" {
-		remoteDebugURL = "http://localhost:6082"
+	// 1) Derive the series slug from the title
+	fullTitle, err := t.FetchTitle()
+	if err != nil {
+		return nil, fmt.Errorf("could not fetch title: %w", err)
 	}
-	allocCtx, allocCancel := chromedp.NewRemoteAllocator(context.Background(), remoteDebugURL)
-	defer allocCancel()
-	ctx, cancel := chromedp.NewContext(allocCtx)
-	defer cancel()
-	ctx, cancel = context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
+	// e.g. "The Knight King Who Returned with a God" → "the-knight-king-who-returned-with-a-god"
+	slug := strings.ToLower(strings.ReplaceAll(strings.TrimSpace(fullTitle), " ", "-"))
 
-	var imagesJSON string
+	// 2) JavaScript extractor
 	jsImg := `(function(){
-		var imgs = document.querySelectorAll("div.reading-content img.wp-manga-chapter-img");
-		var srcs = [];
-		for(var i = 0; i < imgs.length; i++){
-			var src = imgs[i].getAttribute("src") || imgs[i].getAttribute("data-src");
-			if(src && src.trim() !== ""){
-				srcs.push(src.trim());
-			}
-		}
-		return JSON.stringify(srcs);
-	})();`
+        var imgs = document.querySelectorAll("div.reading-content img.wp-manga-chapter-img");
+        var srcs = [];
+        for(var i=0;i<imgs.length;i++){
+            var src = imgs[i].getAttribute("src") || imgs[i].getAttribute("data-src");
+            if(src && src.trim()) srcs.push(src.trim());
+        }
+        return JSON.stringify(srcs);
+    })();`
 
-	if err := chromedp.Run(ctx,
-		chromedp.Navigate(tc.URL),
-		chromedp.WaitVisible("div.reading-content", chromedp.ByQuery),
-		chromedp.Evaluate(jsImg, &imagesJSON),
-	); err != nil {
-		return nil, fmt.Errorf("chromedp images extraction failed: %w", err)
+	// 3) Ask Tenshi (FastAPI) to save whole chapter into /tenshi/data/{slug}/{chapter‑folder}
+	if err := cloudflare.SaveChapter(tc.URL, jsImg, slug); err != nil {
+		logger.Error("SaveChapter failed: %v", err)
 	}
 
-	var rawURLs []string
-	if err := json.Unmarshal([]byte(imagesJSON), &rawURLs); err != nil {
-		return nil, fmt.Errorf("invalid images JSON: %w", err)
-	}
-
-	// 3) Submit each URL to FastAPI
-	for i, img := range rawURLs {
-		logger.Debug("Toongod.SaveImage [%d/%d]: %s", i+1, len(rawURLs), img)
-		if err := cloudflare.SaveImage(tc.URL, img); err != nil {
-			logger.Error("SaveImage failed: %v", err)
-		}
-		// slight pause to avoid overwhelming the API
-		time.Sleep(100 * time.Millisecond)
-	}
-
-	// 4) Retrieve saved filenames
-	fnames, err := cloudflare.GetSavedImages(tc.URL)
+	// 4) Fetch back the filenames
+	fnames, err := cloudflare.GetSavedImages(tc.URL, slug)
 	if err != nil {
 		return nil, fmt.Errorf("GetSavedImages failed: %w", err)
 	}
 
-	// 5) Build Chapter.Pages with FastAPI URLs
+	// 5) Build our Chapter model with the FastAPI URLs (including slug)
 	ch := &Chapter{
 		Title:      tc.Title,
 		Number:     tc.Number,
@@ -224,15 +219,20 @@ func (t *Toongod) FetchChapter(f Filterable) (*Chapter, error) {
 		Language:   "en",
 	}
 	for idx, fn := range fnames {
-		chap := path.Base(tc.URL)
-		getURL := fmt.Sprintf("%s/get_image?chapter=%s&filename=%s",
+		chapFolder := path.Base(tc.URL)
+		getURL := fmt.Sprintf(
+			"%s/get_image?chapter=%s&filename=%s&slug=%s",
 			cloudflare.FASTAPIBaseURL,
-			url.PathEscape(chap),
+			url.PathEscape(chapFolder),
 			url.QueryEscape(fn),
+			url.QueryEscape(slug),
 		)
-		ch.Pages = append(ch.Pages, Page{Number: int64(idx + 1), URL: getURL})
+		ch.Pages = append(ch.Pages, Page{
+			Number: int64(idx + 1),
+			URL:    getURL,
+		})
 	}
-	logger.Debug("Toongod.FetchChapter → %d pages via FastAPI", len(ch.Pages))
+
 	return ch, nil
 }
 

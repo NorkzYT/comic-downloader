@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
@@ -84,16 +85,16 @@ func run(cmd *cobra.Command, args []string) {
 	}
 	s.InitFlags(cmd)
 
-	if _, isToongod := s.(*grabber.Toongod); isToongod {
-		settings.MaxConcurrency.Chapters = 1
-	}
-
 	if bl, ok := s.(BrowserlessUser); ok && bl.UsesBrowser() {
 		fmt.Println("Initializing remote browser; please wait...")
 	}
 
 	title, err := s.FetchTitle()
 	cerr(err, "Error fetching title: ")
+
+	// Derive a filesystem‑safe slug and nest output under it
+	slug := strings.ToLower(strings.ReplaceAll(strings.TrimSpace(title), " ", "-"))
+	settings.OutputDir = filepath.Join(settings.OutputDir, slug)
 
 	chapters, errs := s.FetchChapters()
 	if len(errs) > 0 {

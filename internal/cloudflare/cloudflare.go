@@ -54,11 +54,12 @@ func TriggerCloudflare(seriesURL string, sleepMs int) error {
 }
 
 // SaveImage calls FastAPI’s /save_image to persist a single image URL.
-func SaveImage(chapterURL, imageURL string) error {
+func SaveImage(chapterURL, imageURL, slug string) error {
 	endpoint := FASTAPIBaseURL + "/save_image"
 	values := url.Values{
 		"chapter_url": {chapterURL},
 		"image_url":   {imageURL},
+		"slug":        {slug},
 	}
 	full := endpoint + "?" + values.Encode()
 	logger.Debug("cloudflare.SaveImage → %s", full)
@@ -75,16 +76,44 @@ func SaveImage(chapterURL, imageURL string) error {
 	return nil
 }
 
+// SaveChapter calls FastAPI’s /save_chapter to batch‐save all images.
+func SaveChapter(chapterURL, js, slug string) error {
+	endpoint := FASTAPIBaseURL + "/save_chapter"
+	params := url.Values{
+		"chapter_url": {chapterURL},
+		"js":          {js},
+		"slug":        {slug},
+	}
+	full := endpoint + "?" + params.Encode()
+	logger.Debug("cloudflare.SaveChapter → %s", full)
+
+	resp, err := http.Get(full)
+	if err != nil {
+		return fmt.Errorf("save_chapter GET failed: %w", err)
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		b, _ := io.ReadAll(resp.Body)
+		return fmt.Errorf("save_chapter non-200 %d: %s",
+			resp.StatusCode, strings.TrimSpace(string(b)))
+	}
+	return nil
+}
+
 // GetSavedImages calls FastAPI’s /get_image (no filename) and returns the JSON list.
-func GetSavedImages(chapterURL string) ([]string, error) {
+func GetSavedImages(chapterURL, slug string) ([]string, error) {
 	u, err := url.Parse(chapterURL)
 	if err != nil {
 		return nil, fmt.Errorf("invalid chapter URL: %w", err)
 	}
 	folder := path.Base(u.Path)
 
+	// include slug in the query
 	endpoint := FASTAPIBaseURL + "/get_image"
-	values := url.Values{"chapter": {folder}}
+	values := url.Values{
+		"slug":    {slug},
+		"chapter": {folder},
+	}
 	full := endpoint + "?" + values.Encode()
 	logger.Debug("cloudflare.GetSavedImages → %s", full)
 
@@ -106,7 +135,6 @@ func GetSavedImages(chapterURL string) ([]string, error) {
 		return nil, fmt.Errorf("invalid get_image JSON: %w", err)
 	}
 
-	// ————————————————
 	// Sort payload.Images by the numeric page prefix
 	sort.Slice(payload.Images, func(i, j int) bool {
 		aParts := strings.SplitN(payload.Images[i], "-", 2)
@@ -115,7 +143,6 @@ func GetSavedImages(chapterURL string) ([]string, error) {
 		bi, _ := strconv.Atoi(bParts[0])
 		return ai < bi
 	})
-	// ————————————————
 
 	return payload.Images, nil
 }
