@@ -31,7 +31,8 @@ RICHGO := $(shell command -v richgo 2>/dev/null)
 # ---------------------------
 .PHONY: help check install build build-all build/unix build/win test grabber \
         grabber/asurascans grabber/cypherscans grabber/inmanga \
-        grabber/mangadex grabber/mangamonk grabber/reaperscans clean
+        grabber/mangadex grabber/mangamonk grabber/reaperscans clean \
+		up down
 
 # ---------------------------
 #  Help
@@ -136,3 +137,18 @@ grabber/reaperscans:
 clean:
 	@echo "→ Cleaning build artifacts..."
 	@rm -rf $(BUILD_DIR) $(BINARY_NAME)* *.cbz
+
+
+# ---------------------------
+#  Docker Compose Helpers
+# ---------------------------
+
+# Start Browserless + comic-downloader (Tenshi) stack
+up:
+	@echo "→ Starting Browserless and Tenshi containers..."
+	docker compose -f docker-compose.yml up -d --force-recreate
+
+# Tear down the stack
+down:
+	@echo "→ Stopping and removing containers..."
+	docker compose -f docker-compose.yml down
