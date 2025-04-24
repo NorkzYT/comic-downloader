@@ -7,6 +7,11 @@ services:
     restart: unless-stopped
     env_file:
       - ./.env
+    environment:
+      - BROWSERLESS_HOST_IP=${BROWSERLESS_HOST_IP:?error}
+      - BROWSERLESS_TOKEN=${BROWSERLESS_TOKEN:?error}
+      - DOCKER=${DOCKER:?error}
+      - DEBUG=${DEBUG}
     volumes:
       - /opt/appdata/comic-downloader/downloads:/downloads
     networks:

@@ -70,9 +70,12 @@ func (g *Grabber) IdentifySite() (Site, []error) {
 		&AsuraScans{Grabber: g},
 		&CypherScans{Grabber: g},
 		&Inmanga{Grabber: g},
+		&Kappabeast{Grabber: g},
 		&Mangadex{Grabber: g},
 		&Mangamonk{Grabber: g},
 		&ReaperScans{Grabber: g},
+		&ToonClash{Grabber: g},
+		&Toongod{Grabber: g},
 	}
 	var errs []error
 

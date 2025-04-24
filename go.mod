@@ -2,11 +2,11 @@ module github.com/NorkzYT/comic-downloader
 
 go 1.23.0
 
-toolchain go1.23.7
+toolchain go1.24.2
 
 require (
-	github.com/PuerkitoBio/goquery v1.10.2
-	github.com/chromedp/chromedp v0.13.3
+	github.com/PuerkitoBio/goquery v1.10.3
+	github.com/chromedp/chromedp v0.13.6
 	github.com/fatih/color v1.18.0
 	github.com/ivanpirog/coloredcobra v1.0.1
 	github.com/joho/godotenv v1.5.1
@@ -14,14 +14,20 @@ require (
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/pflag v1.0.6
 	github.com/tcnksm/go-latest v0.0.0-20170313132115-e3007ae9052e
-	golang.org/x/term v0.30.0
+	github.com/vbauerster/mpb/v8 v8.9.3
+	golang.org/x/term v0.31.0
 )
 
-require golang.org/x/text v0.23.0 // indirect
+require (
+	golang.org/x/text v0.24.0 // indirect
+	golang.org/x/time v0.11.0 // indirect
+)
 
 require (
 	github.com/andybalholm/cascadia v1.3.3 // indirect
-	github.com/chromedp/cdproto v0.0.0-20250319231242-a755498943c8 // indirect
+	github.com/beevik/etree v1.5.0 // indirect
+	github.com/celogeek/go-comic-converter/v3 v3.0.2 // indirect
+	github.com/chromedp/cdproto v0.0.0-20250403032234-65de8f5d025b // indirect
 	github.com/chromedp/sysutil v1.1.0 // indirect
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
 	github.com/go-json-experiment/json v0.0.0-20250211171154-1ae217ad3535 // indirect
@@ -37,6 +43,9 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
-	golang.org/x/net v0.38.0 // indirect
-	golang.org/x/sys v0.31.0 // indirect
+	github.com/schollz/progressbar/v3 v3.18.0 // indirect
+	golang.org/x/image v0.24.0 // indirect
+	golang.org/x/net v0.39.0 // indirect
+	golang.org/x/sys v0.32.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

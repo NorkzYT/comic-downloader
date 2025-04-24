@@ -1,0 +1,56 @@
+name: comic-downloader
+services:
+  comic-downloader-browserless:
+    image: ghcr.io/browserless/chromium:latest
+    container_name: comic-downloader-browserless
+    pull_policy: always
+    restart: unless-stopped
+    environment:
+      - TOKEN=${BROWSERLESS_TOKEN}
+      - TIMEOUT=300000
+      - HEALTH=true
+      - ALLOW_GET=true
+      - ALLOW_FILE_PROTOCOL=true
+      - METRICS_JSON_PATH=/root/metrics.json
+      - DATA_DIR=/tmp/my-profile
+      - DOWNLOAD_DIR=/downloads
+      # Proxy:
+      # - EXTERNAL=${protocol}://${username}:${password}@${host}:${port}
+    ports:
+      - 8454:3000
+    volumes:
+      - /opt/appdata/comic-downloader-browserless/root:/root
+      - /opt/appdata/comic-downloader-browserless/tmp/my-profile:/tmp/my-profile
+      - /opt/appdata/comic-downloader-browserless/downloads:/downloads
+    networks:
+      - proxy
+
+  tenshi:
+    image: norkz/tenshi:1.0.0
+    container_name: tenshi
+    hostname: tenshi
+    environment:
+      - PASSWORD=${TENSHI_PASSWORD:?error}
+      - VNC_PASSWORD=${TENSHI_VNC_PASSWORD:?error}
+    ports:
+      # FastAPI
+      - "6081:8000"
+      # Browser remote debugging port
+      - "6082:9222"
+      # noVNC HTML5 interface and raw VNC (for debugging)
+      # - "6080:6080"
+      # - "5900:5900"
+    volumes:
+      - /dev/shm:/dev/shm
+      - /run/dbus/system_bus_socket:/host/run/dbus/system_bus_socket
+      - /opt/appdata/tenshi/data:/tenshi/data
+    cap_add:
+      - SYS_PTRACE
+    restart: on-failure
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    driver: bridge
+    external: true

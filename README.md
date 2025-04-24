@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="docs/content/assets/img/comic-downloader-cover-rl.png" width="490" alt="Comic Downloader">
+    <img src="https://raw.githubusercontent.com/NorkzYT/comic-downloader/refs/heads/main/docs/content/assets/img/comic-downloader-cover-rl.png" width="490" alt="Comic Downloader">
 </p>
 
 <p align="center">
@@ -53,7 +53,7 @@
 
 <p></p>
 <p align="center">
-  <img src="./demos/prompt.gif" alt="prompt img">
+  <img src="https://raw.githubusercontent.com/NorkzYT/comic-downloader/refs/heads/main/demos/prompt.gif" alt="prompt img">
 </p>
 
 ## 🌐 Supported Websites
@@ -66,9 +66,12 @@ Currently, comic-downloader supports the following websites:
 - [Asura Scans](https://asuracomic.net)
 - [CypherScans](https://cypheroscans.xyz)
 - [InManga](https://inmanga.com)
+- [KappaBeast](https://kappabeast.com)
 - [MangaDex](https://mangadex.org)
 - [MangaMonk](https://mangamonk.com)
 - [ReaperScans](https://reaperscans.com)
+- [Toongod](https://toongod.org)
+- [ToonClash](https://toonclash.com)
 
 If a site you use isn't listed, please [open an issue](https://github.com/NorkzYT/comic-downloader/issues) or contribute directly via pull request.
 
@@ -113,17 +116,15 @@ comic-downloader [URL] [range]
 
 ### 🐳 Docker
 
-#### Browserless Container
-
-Before running comic-downloader in Docker, start your Browserless container using:
+Before running **comic‑downloader** (whether you use the local CLI or the Docker image), you must start your Browserless & Tenshi containers:
 
 ```bash
-docker compose -f docker/containers/browserless/docker-compose.yml up -d --force-recreate
+make up
 ```
 
 #### comic-downloader Container
 
-Then, run comic-downloader via Docker Compose with:
+Rrun comic-downloader via Docker Compose with:
 
 ```bash
 docker compose -f docker/containers/comic-downloader/docker-compose.yml up -d --force-recreate
@@ -133,18 +134,40 @@ docker compose -f docker/containers/comic-downloader/docker-compose.yml up -d --
 
 ## 🔧 Environment Setup
 
-Before running comic-downloader, you **must** set up your Browserless configuration in a `.env` file located in the project root. At a minimum, include the following variables:
+1. Copy the example file:
 
-```dotenv
-# Your Browserless Host IP (required)
-BROWSERLESS_HOST_IP='xxx.xxx.xxx.xx'
+   ```bash
+   cp .env.example .env
+   ```
 
-# Your Browserless API token (required)
-BROWSERLESS_TOKEN=your_token_here
+2. Open `.env` and fill in each value (the example is below). At minimum you need:
 
-# (Optional) Set to "true" if running comic-downloader in a Docker environment.
-DOCKER=false
-```
+   ```dotenv
+   # Enable compose bake (optional)
+   COMPOSE_BAKE=true
+
+   # Tenshi (FastAPI) container credentials
+   TENSHI_PASSWORD='tenshi'
+   TENSHI_VNC_PASSWORD='xxx'
+
+   # Browserless (Chromium) settings
+   BROWSERLESS_HOST_IP='xxx.xxx.xxx.xx'
+   BROWSERLESS_TOKEN='your_token_here'
+   REMOTE_DEBUG_URL='http://localhost:6082'
+   FASTAPI_BASE_URL='http://localhost:6081'
+
+   # Toggle Docker mode and debug logs
+   DOCKER=false
+   DEBUG=false
+   ```
+
+3. Make sure those containers are up:
+
+   ```bash
+   make up
+   ```
+
+> **Important:** If **Browserless** (port 8454 or 3000 in Docker) or **Tenshi** (port 6081) aren’t reachable, **comic-downloader** will refuse to start.
 
 If you're running locally, the application will connect to:
 
@@ -172,7 +195,7 @@ comic-downloader [URL]
 
 <p></p>
 <p align="">
-  <img src="./demos/download.gif" alt="download img">
+  <img src="https://raw.githubusercontent.com/NorkzYT/comic-downloader/refs/heads/main/demos/download.gif?raw=true" alt="download img">
 </p>
 
 The URL must be the series' main page.
@@ -203,7 +226,7 @@ comic-downloader [URL] 1-2 --bundle
 
 <p></p>
 <p align="">
-  <img src="./demos/bundle.gif" alt="bundle img">
+  <img src="https://raw.githubusercontent.com/NorkzYT/comic-downloader/refs/heads/main/demos/bundle.gif?raw=true" alt="bundle img">
 </p>
 
 ### Help
@@ -216,7 +239,7 @@ comic-downloader help
 
 <p></p>
 <p align="">
-  <img src="./demos/help.gif" alt="help img">
+  <img src="https://raw.githubusercontent.com/NorkzYT/comic-downloader/refs/heads/main/demos/help.gif?raw=true" alt="help img">
 </p>
 
 ## 🛠️ Troubleshooting

@@ -11,14 +11,13 @@ import (
 	"github.com/NorkzYT/comic-downloader/internal/grabber"
 )
 
-// DownloadedChapter represents a downloaded chapter (the chapter info along with its downloaded files).
+// DownloadedChapter represents a downloaded chapter (info + files).
 type DownloadedChapter struct {
 	*grabber.Chapter
 	Files []*downloader.File
 }
 
-// getSiteFormat extracts the archive format from the site's settings.
-// It expects the site to implement a GetFormat() string method.
+// getSiteFormat extracts the archive format from the Site settings.
 func getSiteFormat(s grabber.Site) (string, error) {
 	type formatGetter interface {
 		GetFormat() string
@@ -29,62 +28,97 @@ func getSiteFormat(s grabber.Site) (string, error) {
 	return "", fmt.Errorf("site does not implement GetFormat")
 }
 
-// PackSingle packages a single downloaded chapter using the selected archive format.
-// It uses the filename template from the Site settings.
-func PackSingle(outputDir string, s grabber.Site, chapter *DownloadedChapter, progress func(page, progress int)) (string, error) {
+// PackSingle packages one chapter. If format=="raw" it creates a folder;
+// otherwise it creates a .cbz/.zip via the archiver.
+func PackSingle(
+	outputDir string,
+	s grabber.Site,
+	chapter *DownloadedChapter,
+	progress func(page, total int),
+) (string, error) {
+	// 1) Determine the base name (no extension)
 	title, _ := s.FetchTitle()
-	parts := NewChapterFileTemplateParts(title, chapter.Chapter)
-	filename, err := NewFilenameFromTemplate(s.GetFilenameTemplate(), parts)
-	if err != nil {
-		return "", fmt.Errorf("- error creating filename for chapter %s: %s", title, err.Error())
+	format, _ := getSiteFormat(s)
+
+	var baseName string
+	if format == "raw" {
+		baseName = fmt.Sprintf("chapter-%d", int(chapter.Number))
+	} else {
+		parts := NewChapterFileTemplateParts(title, chapter.Chapter)
+		baseName, _ = NewFilenameFromTemplate(s.GetFilenameTemplate(), parts)
 	}
-	// Retrieve the desired format from settings.
-	format, err := getSiteFormat(s)
-	if err != nil {
-		return "", err
-	}
+
+	// 2) Pick the archiver interface (used only for zip/cbz)
 	archiver, err := NewArchiver(format)
 	if err != nil {
 		return "", err
 	}
-	return pack(outputDir, filename, chapter.Files, progress, archiver)
+
+	// 3) Resolve duplicates: chapter-1, chapter-1_v1, chapter-1_v2, ...
+	target, err := resolveDuplicate(outputDir, baseName, format)
+	if err != nil {
+		return "", err
+	}
+
+	// 4a) RAW mode: write files into a folder named by `target`
+	if format == "raw" {
+		folder := filepath.Join(outputDir, target)
+		if err := os.MkdirAll(folder, 0755); err != nil {
+			return "", err
+		}
+		for i, file := range chapter.Files {
+			fname := fmt.Sprintf("%03d.jpg", i+1)
+			dest := filepath.Join(folder, fname)
+			if err := os.WriteFile(dest, file.Data, 0644); err != nil {
+				return "", err
+			}
+			progress(i+1, len(chapter.Files))
+		}
+		return folder, nil
+	}
+
+	// 4b) ZIP/CBZ mode: hand off to the archiver (it will append .cbz/.zip)
+	return archiver.Archive(outputDir, target, chapter.Files, progress)
 }
 
-// PackBundle packages multiple downloaded chapters into a single archive (bundle)
-// with each chapter placed in its own folder inside the archive.
-func PackBundle(outputDir string, s grabber.Site, chapters []*DownloadedChapter, rng string, progress func(page, progress int)) (string, error) {
+// PackBundle packages multiple chapters into one archive or raw-folder bundle.
+func PackBundle(
+	outputDir string,
+	s grabber.Site,
+	chapters []*DownloadedChapter,
+	rng string,
+	progress func(page, total int),
+) (string, error) {
+	// build baseName from title + range
 	title, _ := s.FetchTitle()
-	// Determine appropriate prefix based on the range.
-	// For a single chapter, use "Chapter "; for multiple, use "Chapters ".
 	var prefix string
 	if strings.Contains(rng, "-") || strings.Contains(rng, ",") {
 		prefix = "Chapters "
 	} else {
 		prefix = "Chapter "
 	}
-	parts := FilenameTemplateParts{
-		Series: title,
-		Number: prefix + rng,
-		Title:  "bundle",
-	}
-	filename, err := NewFilenameFromTemplate(s.GetFilenameTemplate(), parts)
+	parts := FilenameTemplateParts{Series: title, Number: prefix + rng, Title: "bundle"}
+	baseName, err := NewFilenameFromTemplate(s.GetFilenameTemplate(), parts)
 	if err != nil {
-		return "", fmt.Errorf("- error creating bundle filename for %s: %s", title, err.Error())
+		return "", fmt.Errorf("error creating bundle filename: %w", err)
 	}
+
 	format, err := getSiteFormat(s)
 	if err != nil {
 		return "", err
 	}
-	return packBundleChapters(outputDir, filename, chapters, progress, format)
-}
 
-// packBundleChapters selects the bundling method based on the archive format.
-func packBundleChapters(outputDir, filename string, chapters []*DownloadedChapter, progress func(page, progress int), format string) (string, error) {
+	// ensure no overwrite on bundle name too
+	target, err := resolveDuplicate(outputDir, baseName, format)
+	if err != nil {
+		return "", err
+	}
+
 	switch format {
 	case "cbz", "zip":
-		return packBundleToZip(outputDir, filename, chapters, progress, format)
+		return packBundleToZip(outputDir, target, chapters, progress, format)
 	case "raw":
-		return packBundleToRaw(outputDir, filename, chapters, progress)
+		return packBundleToRaw(outputDir, target, chapters, progress)
 	default:
 		return "", fmt.Errorf("unsupported bundle format: %s", format)
 	}
@@ -101,7 +135,12 @@ func packBundleChapters(outputDir, filename string, chapters []*DownloadedChapte
 //	    001.jpg
 //	    002.jpg
 //	    ...
-func packBundleToZip(outputDir, filename string, chapters []*DownloadedChapter, progress func(page, progress int), format string) (string, error) {
+func packBundleToZip(
+	outputDir, filename string,
+	chapters []*DownloadedChapter,
+	progress func(page, total int),
+	format string,
+) (string, error) {
 	ext := format // "cbz" or "zip"
 	fullPath := filepath.Join(outputDir, filename+"."+ext)
 	outFile, err := os.Create(fullPath)
@@ -111,27 +150,23 @@ func packBundleToZip(outputDir, filename string, chapters []*DownloadedChapter, 
 	defer outFile.Close()
 
 	zipWriter := zip.NewWriter(outFile)
+	defer zipWriter.Close()
+
 	for _, chapter := range chapters {
-		chapNum := int(chapter.Number)
-		// Format chapter folder name (e.g., "Chapter 05")
-		folderName := fmt.Sprintf("Chapter %02d", chapNum)
+		folderName := fmt.Sprintf("Chapter %02d", int(chapter.Number))
 		for i, file := range chapter.Files {
-			// Create entry path inside the zip archive: e.g., "Chapter 05/001.jpg"
-			entryName := fmt.Sprintf("%s/%03d.jpg", folderName, i)
-			writer, err := zipWriter.Create(entryName)
+			entry := fmt.Sprintf("%s/%03d.jpg", folderName, i+1)
+			w, err := zipWriter.Create(entry)
 			if err != nil {
 				return "", err
 			}
-			if _, err = writer.Write(file.Data); err != nil {
+			if _, err := w.Write(file.Data); err != nil {
 				return "", err
 			}
-			// Report progress per file added.
-			progress(1, 0)
+			progress(i+1, len(chapter.Files))
 		}
 	}
-	if err = zipWriter.Close(); err != nil {
-		return "", err
-	}
+
 	return fullPath, nil
 }
 
@@ -144,29 +179,57 @@ func packBundleToZip(outputDir, filename string, chapters []*DownloadedChapter, 
 //	Chapter 02/
 //	    001.jpg
 //	    002.jpg
-func packBundleToRaw(outputDir, filename string, chapters []*DownloadedChapter, progress func(page, progress int)) (string, error) {
+func packBundleToRaw(
+	outputDir, filename string,
+	chapters []*DownloadedChapter,
+	progress func(page, total int),
+) (string, error) {
 	bundleFolder := filepath.Join(outputDir, filename+"_bundle")
 	if err := os.MkdirAll(bundleFolder, 0755); err != nil {
 		return "", err
 	}
+
 	for _, chapter := range chapters {
-		chapNum := int(chapter.Number)
-		chapFolder := filepath.Join(bundleFolder, fmt.Sprintf("Chapter %02d", chapNum))
+		chapFolder := filepath.Join(bundleFolder, fmt.Sprintf("Chapter %02d", int(chapter.Number)))
 		if err := os.MkdirAll(chapFolder, 0755); err != nil {
 			return "", err
 		}
 		for i, file := range chapter.Files {
-			filePath := filepath.Join(chapFolder, fmt.Sprintf("%03d.jpg", i))
+			filePath := filepath.Join(chapFolder, fmt.Sprintf("%03d.jpg", i+1))
 			if err := os.WriteFile(filePath, file.Data, 0644); err != nil {
 				return "", err
 			}
-			progress(1, 0)
+			progress(i+1, len(chapter.Files))
 		}
 	}
+
 	return bundleFolder, nil
 }
 
-// pack is a helper that uses the given Archiver to package the files.
-func pack(outputDir, filename string, files []*downloader.File, progress func(page, progress int), archiver Archiver) (string, error) {
-	return archiver.Archive(outputDir, filename, files, progress)
+// resolveDuplicate checks for an existing file/folder and appends "_vN".
+func resolveDuplicate(dir, baseName, format string) (string, error) {
+	// extension only for zip/cbz; raw has no ext here
+	ext := ""
+	if format != "raw" {
+		ext = "." + format
+	}
+
+	// first try the plain name
+	candidate := filepath.Join(dir, baseName+ext)
+	if _, err := os.Stat(candidate); os.IsNotExist(err) {
+		return baseName, nil
+	}
+
+	// else find the next free suffix
+	for i := 1; ; i++ {
+		name := fmt.Sprintf("%s_v%d%s", baseName, i, ext)
+		tryPath := filepath.Join(dir, name)
+		if _, err := os.Stat(tryPath); os.IsNotExist(err) {
+			// return baseName_vN (no ext) so archiver adds it if needed
+			if format == "raw" {
+				return fmt.Sprintf("%s_v%d", baseName, i), nil
+			}
+			return fmt.Sprintf("%s_v%d", baseName, i), nil
+		}
+	}
 }

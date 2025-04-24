@@ -45,3 +45,8 @@ func Info(format string, args ...interface{}) {
 func Error(format string, args ...interface{}) {
 	log.Printf("[ERROR] "+format, args...)
 }
+
+// Warn prints warning‐level logs.
+func Warn(format string, args ...interface{}) {
+	log.Printf("[WARN] "+format, args...)
+}
