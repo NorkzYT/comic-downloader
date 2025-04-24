@@ -18,7 +18,10 @@ require (
 	golang.org/x/term v0.31.0
 )
 
-require golang.org/x/text v0.24.0 // indirect
+require (
+	golang.org/x/text v0.24.0 // indirect
+	golang.org/x/time v0.11.0 // indirect
+)
 
 require (
 	github.com/VividCortex/ewma v1.2.0 // indirect
