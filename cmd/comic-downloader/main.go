@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"net"
+	"net/url"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -69,7 +71,73 @@ Note: Arguments are not positional; you may specify them in any order:
 	Run:  run,
 }
 
+func preflightChecks() {
+	// detect Docker mode
+	dockerMode := os.Getenv("DOCKER") == "true"
+
+	// --- Browserless ---
+	var hostPort string
+	if dockerMode {
+		// container-to-container on the default Browserless port
+		hostPort = "comic-downloader-browserless:3000"
+	} else {
+		// parse REMOTE_DEBUG_URL or fallback to host IP
+		ws := os.Getenv("REMOTE_DEBUG_URL")
+		if ws == "" {
+			host := os.Getenv("BROWSERLESS_HOST_IP")
+			if host == "" {
+				host = "localhost"
+			}
+			token := os.Getenv("BROWSERLESS_TOKEN")
+			ws = fmt.Sprintf("ws://%s:8454?token=%s", host, token)
+		}
+		u, err := url.Parse(ws)
+		if err != nil {
+			fmt.Printf("Invalid REMOTE_DEBUG_URL: %v\n", err)
+			os.Exit(1)
+		}
+		hostPort = u.Host
+		if _, _, err := net.SplitHostPort(hostPort); err != nil {
+			hostPort += ":8454"
+		}
+	}
+
+	// dial Browserless
+	conn, err := net.DialTimeout("tcp", hostPort, 2*time.Second)
+	if err != nil {
+		fmt.Printf("Cannot connect to Browserless at %s: %v\n", hostPort, err)
+		os.Exit(1)
+	}
+	conn.Close()
+
+	// --- Tenshi (FastAPI) ---
+	if dockerMode {
+		// in-Docker use the Tenshi service name and its internal port
+		hostPort = "tenshi:8000"
+	} else {
+		api := os.Getenv("FASTAPI_BASE_URL")
+		if api == "" {
+			api = "http://localhost:6081"
+		}
+		u2, err := url.Parse(api)
+		if err != nil {
+			fmt.Printf("Invalid FASTAPI_BASE_URL: %v\n", err)
+			os.Exit(1)
+		}
+		hostPort = u2.Host
+	}
+
+	conn2, err := net.DialTimeout("tcp", hostPort, 2*time.Second)
+	if err != nil {
+		fmt.Printf("Cannot connect to Tenshi FastAPI at %s: %v\n", hostPort, err)
+		os.Exit(1)
+	}
+	conn2.Close()
+}
+
 func run(cmd *cobra.Command, args []string) {
+	// **fail fast before doing any work**
+	preflightChecks()
 	logger.Debug("rootCmd.Run: Starting execution with args: %v", args)
 	s, errs := grabber.NewSite(getUrlArg(args), &settings)
 	if len(errs) > 0 {

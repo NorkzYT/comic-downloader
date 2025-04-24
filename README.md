@@ -167,7 +167,7 @@ docker compose -f docker/containers/comic-downloader/docker-compose.yml up -d --
    make up
    ```
 
-> **Important:** If you don’t configure and start Browserless & Tenshi first, comic‑downloader won’t be able to connect.
+> **Important:** If **Browserless** (port 8454 or 3000 in Docker) or **Tenshi** (port 6081) aren’t reachable, **comic-downloader** will refuse to start.
 
 If you're running locally, the application will connect to:
 
