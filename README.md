@@ -67,6 +67,7 @@ Currently, comic-downloader supports the following websites:
 - [CypherScans](https://cypheroscans.xyz)
 - [InManga](https://inmanga.com)
 - [KappaBeast](https://kappabeast.com)
+- [Mangabuddy](https://mangabuddy.com)
 - [MangaDex](https://mangadex.org)
 - [MangaMonk](https://mangamonk.com)
 - [ReaperScans](https://reaperscans.com)
