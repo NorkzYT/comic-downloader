@@ -1,7 +1,7 @@
 {
 	"name": "comic-downloader",
 	"description": "Fast, reliable, and easy-to-use CLI tool for downloading comics (manga, manhwa, and more) from popular websites.",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"author": "NorkzYT",
 	"private": false,
 	"scripts": {
