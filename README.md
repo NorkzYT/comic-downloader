@@ -70,6 +70,7 @@ Currently, comic-downloader supports the following websites:
 - [Mangabuddy](https://mangabuddy.com)
 - [MangaDex](https://mangadex.org)
 - [MangaMonk](https://mangamonk.com)
+- [MangaWorldNZ](https://www.mangaworld.nz)
 - [ReaperScans](https://reaperscans.com)
 - [Toongod](https://toongod.org)
 - [ToonClash](https://toonclash.com)

@@ -74,6 +74,7 @@ func (g *Grabber) IdentifySite() (Site, []error) {
 		&Mangabuddy{Grabber: g},
 		&Mangadex{Grabber: g},
 		&Mangamonk{Grabber: g},
+		&MangaWorldNZ{Grabber: g},
 		&ReaperScans{Grabber: g},
 		&ToonClash{Grabber: g},
 		&Toongod{Grabber: g},
