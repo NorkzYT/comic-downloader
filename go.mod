@@ -14,14 +14,12 @@ require (
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/pflag v1.0.6
 	github.com/tcnksm/go-latest v0.0.0-20170313132115-e3007ae9052e
-	github.com/vbauerster/mpb/v8 v8.9.3
+	github.com/vbauerster/mpb/v8 v8.10.0
 	golang.org/x/term v0.31.0
+	golang.org/x/time v0.11.0
 )
 
-require (
-	golang.org/x/text v0.24.0 // indirect
-	golang.org/x/time v0.11.0 // indirect
-)
+require golang.org/x/text v0.24.0 // indirect
 
 require (
 	github.com/andybalholm/cascadia v1.3.3 // indirect
