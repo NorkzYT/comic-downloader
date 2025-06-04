@@ -78,6 +78,7 @@ func (g *Grabber) IdentifySite() (Site, []error) {
 		&ReaperScans{Grabber: g},
 		&ToonClash{Grabber: g},
 		&Toongod{Grabber: g},
+		&Zonatmo{Grabber: g},
 	}
 	var errs []error
 
