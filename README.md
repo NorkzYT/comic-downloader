@@ -74,6 +74,7 @@ Currently, comic-downloader supports the following websites:
 - [ReaperScans](https://reaperscans.com)
 - [Toongod](https://toongod.org)
 - [ToonClash](https://toonclash.com)
+- [Zonatmo](https://zonatmo.com)
 
 If a site you use isn't listed, please [open an issue](https://github.com/NorkzYT/comic-downloader/issues) or contribute directly via pull request.
 
