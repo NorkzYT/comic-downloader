@@ -16,7 +16,7 @@ require (
 	github.com/tcnksm/go-latest v0.0.0-20170313132115-e3007ae9052e
 	github.com/vbauerster/mpb/v8 v8.10.1
 	golang.org/x/term v0.32.0
-	golang.org/x/time v0.11.0
+	golang.org/x/time v0.12.0
 )
 
 require golang.org/x/text v0.24.0 // indirect
