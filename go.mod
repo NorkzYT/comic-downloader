@@ -6,7 +6,7 @@ toolchain go1.24.4
 
 require (
 	github.com/PuerkitoBio/goquery v1.10.3
-	github.com/chromedp/chromedp v0.13.6
+	github.com/chromedp/chromedp v0.13.7
 	github.com/fatih/color v1.18.0
 	github.com/ivanpirog/coloredcobra v1.0.1
 	github.com/joho/godotenv v1.5.1

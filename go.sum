@@ -18,6 +18,8 @@ github.com/chromedp/chromedp v0.13.3 h1:c6nTn97XQBykzcXiGYL5LLebw3h3CEyrCihm4Hqu
 github.com/chromedp/chromedp v0.13.3/go.mod h1:khsDP9OP20GrowpJfZ7N05iGCwcAYxk7qf9AZBzR3Qw=
 github.com/chromedp/chromedp v0.13.6 h1:xlNunMyzS5bu3r/QKrb3fzX6ow3WBQ6oao+J65PGZxk=
 github.com/chromedp/chromedp v0.13.6/go.mod h1:h8GPP6ZtLMLsU8zFbTcb7ZDGCvCy8j/vRoFmRltQx9A=
+github.com/chromedp/chromedp v0.13.7 h1:vt+mslxscyvUr58eC+6DLSeeo74jpV/HI2nWetjv/W4=
+github.com/chromedp/chromedp v0.13.7/go.mod h1:h8GPP6ZtLMLsU8zFbTcb7ZDGCvCy8j/vRoFmRltQx9A=
 github.com/chromedp/sysutil v1.1.0 h1:PUFNv5EcprjqXZD9nJb9b/c9ibAbxiYo4exNWZyipwM=
 github.com/chromedp/sysutil v1.1.0/go.mod h1:WiThHUdltqCNKGc4gaU50XgYjwjYIhKWoHGPTUfWTJ8=
 github.com/chzyer/logex v1.1.10 h1:Swpa1K6QvQznwJRcfTfQJmTE72DqScAa40E+fbHEXEE=
