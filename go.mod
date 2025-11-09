@@ -14,7 +14,7 @@ require (
 	github.com/spf13/cobra v1.10.1
 	github.com/spf13/pflag v1.0.10
 	github.com/tcnksm/go-latest v0.0.0-20170313132115-e3007ae9052e
-	github.com/vbauerster/mpb/v8 v8.11.0
+	github.com/vbauerster/mpb/v8 v8.11.1
 	golang.org/x/term v0.36.0
 	golang.org/x/time v0.14.0
 )

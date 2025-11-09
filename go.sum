@@ -125,6 +125,7 @@ github.com/vbauerster/mpb/v8 v8.10.0/go.mod h1:DYPFebxSahB+f7tuEUGauLQ7w8ij3wMr4
 github.com/vbauerster/mpb/v8 v8.10.1/go.mod h1:+Ja4P92E3/CorSZgfDtK46D7AVbDqmBQRTmyTqPElo0=
 github.com/vbauerster/mpb/v8 v8.10.2/go.mod h1:+Ja4P92E3/CorSZgfDtK46D7AVbDqmBQRTmyTqPElo0=
 github.com/vbauerster/mpb/v8 v8.11.0/go.mod h1:WlKnGgq39HAZhrOLc74w3YnKgmjTiRDDKGXshXwUTro=
+github.com/vbauerster/mpb/v8 v8.11.1/go.mod h1:WlKnGgq39HAZhrOLc74w3YnKgmjTiRDDKGXshXwUTro=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20210921155107-089bfa567519/go.mod h1:GvvjBRRGRdwPK5ydBHafDWAxML/pGHZbMvKqRZ5+Abc=
