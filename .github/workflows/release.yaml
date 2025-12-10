@@ -28,7 +28,7 @@ jobs:
         run: |
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo "tag=$(git describe --tags)" >> $GITHUB_ENV
-      - uses: wangyoucao577/go-release-action@v1.53
+      - uses: wangyoucao577/go-release-action@v1.54
         with:
           github_token: ${{ secrets.PACKAGE_TOKEN }}
           goos: ${{ matrix.goos }}
