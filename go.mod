@@ -1,6 +1,6 @@
 module github.com/NorkzYT/comic-downloader
 
-go 1.24.0
+go 1.25.0
 
 toolchain go1.26.1
 
@@ -16,7 +16,7 @@ require (
 	github.com/tcnksm/go-latest v0.0.0-20170313132115-e3007ae9052e
 	github.com/vbauerster/mpb/v8 v8.12.0
 	golang.org/x/term v0.40.0
-	golang.org/x/time v0.14.0
+	golang.org/x/time v0.15.0
 )
 
 require (
