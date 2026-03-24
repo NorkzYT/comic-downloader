@@ -20,6 +20,8 @@ github.com/chromedp/cdproto v0.0.0-20250403032234-65de8f5d025b h1:jJmiCljLNTaq/O
 github.com/chromedp/cdproto v0.0.0-20250403032234-65de8f5d025b/go.mod h1:NItd7aLkcfOA/dcMXvl8p1u+lQqioRMq/SqDp71Pb/k=
 github.com/chromedp/cdproto v0.0.0-20250724212937-08a3db8b4327 h1:UQ4AU+BGti3Sy/aLU8KVseYKNALcX9UXY6DfpwQ6J8E=
 github.com/chromedp/cdproto v0.0.0-20250724212937-08a3db8b4327/go.mod h1:NItd7aLkcfOA/dcMXvl8p1u+lQqioRMq/SqDp71Pb/k=
+github.com/chromedp/cdproto v0.0.0-20260320225252-cf654f46fc63 h1:f027idvVkILyihTa8Z2vQCxTYPqHNdKlW7cXdMSZegU=
+github.com/chromedp/cdproto v0.0.0-20260320225252-cf654f46fc63/go.mod h1:cbyjALe67vDvlvdiG9369P8w5U2w6IshwtyD2f2Tvag=
 github.com/chromedp/chromedp v0.13.3 h1:c6nTn97XQBykzcXiGYL5LLebw3h3CEyrCihm4HquYh0=
 github.com/chromedp/chromedp v0.13.3/go.mod h1:khsDP9OP20GrowpJfZ7N05iGCwcAYxk7qf9AZBzR3Qw=
 github.com/chromedp/chromedp v0.13.6 h1:xlNunMyzS5bu3r/QKrb3fzX6ow3WBQ6oao+J65PGZxk=
@@ -32,6 +34,8 @@ github.com/chromedp/chromedp v0.14.1 h1:0uAbnxewy/Q+Bg7oafVePE/6EXEho9hnaC38f+TT
 github.com/chromedp/chromedp v0.14.1/go.mod h1:rHzAv60xDE7VNy/MYtTUrYreSc0ujt2O1/C3bzctYBo=
 github.com/chromedp/chromedp v0.14.2 h1:r3b/WtwM50RsBZHMUm9fsNhhzRStTHrKdr2zmwbZSzM=
 github.com/chromedp/chromedp v0.14.2/go.mod h1:rHzAv60xDE7VNy/MYtTUrYreSc0ujt2O1/C3bzctYBo=
+github.com/chromedp/chromedp v0.15.0 h1:B5abPcaCVetu6GDHsQKj8HbMhDWdiOM52E/TuOfuwyY=
+github.com/chromedp/chromedp v0.15.0/go.mod h1:V5szO2ASqoBZsIQ88EfNMRhi9737Equm5HFL9tsBt3Q=
 github.com/chromedp/sysutil v1.1.0 h1:PUFNv5EcprjqXZD9nJb9b/c9ibAbxiYo4exNWZyipwM=
 github.com/chromedp/sysutil v1.1.0/go.mod h1:WiThHUdltqCNKGc4gaU50XgYjwjYIhKWoHGPTUfWTJ8=
 github.com/chzyer/logex v1.1.10 h1:Swpa1K6QvQznwJRcfTfQJmTE72DqScAa40E+fbHEXEE=
@@ -57,6 +61,8 @@ github.com/go-json-experiment/json v0.0.0-20250211171154-1ae217ad3535 h1:yE7argO
 github.com/go-json-experiment/json v0.0.0-20250211171154-1ae217ad3535/go.mod h1:BWmvoE1Xia34f3l/ibJweyhrT+aROb/FQ6d+37F0e2s=
 github.com/go-json-experiment/json v0.0.0-20250725192818-e39067aee2d2 h1:iizUGZ9pEquQS5jTGkh4AqeeHCMbfbjeb0zMt0aEFzs=
 github.com/go-json-experiment/json v0.0.0-20250725192818-e39067aee2d2/go.mod h1:TiCD2a1pcmjd7YnhGH0f/zKNcCD06B029pHhzV23c2M=
+github.com/go-json-experiment/json v0.0.0-20260214004413-d219187c3433 h1:vymEbVwYFP/L05h5TKQxvkXoKxNvTpjxYKdF1Nlwuao=
+github.com/go-json-experiment/json v0.0.0-20260214004413-d219187c3433/go.mod h1:tphK2c80bpPhMOI4v6bIc2xWywPfbqi1Z06+RcrMkDg=
 github.com/gobwas/httphead v0.1.0 h1:exrUm0f4YX0L7EBwZHuCF4GDp8aJfVeBrlLQrs6NqWU=
 github.com/gobwas/httphead v0.1.0/go.mod h1:O/RXo79gxV8G+RqlR/otEwx4Q36zl9rqC5u12GKvMCM=
 github.com/gobwas/pool v0.2.1 h1:xfeeEhW7pwmX8nuLVlqbzVc7udMDrwetjEv+TZIz1og=
