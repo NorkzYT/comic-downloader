@@ -6,7 +6,7 @@ toolchain go1.26.1
 
 require (
 	github.com/PuerkitoBio/goquery v1.12.0
-	github.com/chromedp/chromedp v0.15.0
+	github.com/chromedp/chromedp v0.15.1
 	github.com/fatih/color v1.19.0
 	github.com/ivanpirog/coloredcobra v1.0.1
 	github.com/joho/godotenv v1.5.1
@@ -29,7 +29,7 @@ require (
 	github.com/andybalholm/cascadia v1.3.3 // indirect
 	github.com/beevik/etree v1.5.0 // indirect
 	github.com/celogeek/go-comic-converter/v3 v3.0.2 // indirect
-	github.com/chromedp/cdproto v0.0.0-20260320225252-cf654f46fc63 // indirect
+	github.com/chromedp/cdproto v0.0.0-20260321001828-e3e3800016bc // indirect
 	github.com/chromedp/sysutil v1.1.0 // indirect
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
 	github.com/go-json-experiment/json v0.0.0-20260214004413-d219187c3433 // indirect
