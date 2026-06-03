@@ -250,6 +250,10 @@ comic-downloader help
 - **"Command not recognized":** Verify the binary is in a PATH-accessible location.
 - **macOS unsigned binary error:** Run `sudo spctl --master-disable`.
 
+## Contributors
+
+We're happy to welcome [@Breadfishman](https://github.com/Breadfishman)'s contributions to our work this project. They collaborated closely on the project under our shared account.
+
 ## 🤝 Contribution
 
 Contributions, issues, and pull requests are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
