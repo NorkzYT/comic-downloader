@@ -2,7 +2,7 @@ module github.com/NorkzYT/comic-downloader
 
 go 1.26
 
-toolchain go1.26.1
+toolchain go1.27.1
 
 require (
 	github.com/PuerkitoBio/goquery v1.12.0
